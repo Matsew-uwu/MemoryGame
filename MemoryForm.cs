@@ -18,12 +18,14 @@ namespace Memory
         // Déclaration des variables globales du jeu
         int nbCartesDansSabot;          // Nombre de cartes dans le sabot (nombre d'images dans le réservoir)
         int nbCartesSurTapis;           // Nombre de cartes sur le tapis
-        List<int> indice_cartes;        // Mémorise les indices cartes générées
+
         LotoMachine hasard;             // Classe Loto 
-        PictureBox Image_1;             // Les images retournées pendant la partie
+        int[] tImagesCartes;            // Tableau des indices pour les cartes tiré par la classe LotoMachine
+        
+        int i_recherche;                // L'inde de la carte à rechercher
+        PictureBox Image_1;             // Les images retournées pendant la partie (leur indice)
         PictureBox Image_2;
         int nb_cartes = 0;              // Nb de carte retourné
-        int[] tImagesCartes;            // Tableau des indices pour les cartes tiré par la classe LotoMachine
 
 
 
@@ -112,48 +114,37 @@ namespace Memory
         //de plus il faut ajouter le pb
         private void pb_XX_Click(object sender, EventArgs e) //permet de connaître la carte choisie
         {
-            PictureBox carte;
-            int i_carte, i_image;
+            // Déclaration des variables à utiliser
 
-            // Initialisation des variables
-            List<int> tapisCARTES = indice_cartes;
-            ImageList imgListe = ilSabotDeCartes;
+            PictureBox carte;               // L'emplacement de la carte
+            int i_carte;                    // L'indice de la carte dans le tapis
+            int i_image;                    // L'indice de la carte correspondante dans la loterie
 
-            int i_hasard = hasard.NumeroAleatoire();
-
-            //if (Image_1 == null)
-            // MessageBox.Show("L'image 1 n'est pas référencée");
-            //if (Image_2 == null)
-            // MessageBox.Show("L'image 2 n'est pas référencée");
-            if (nb_cartes < 2)
+            // Le nombre de carte retourné doit être inférieur à la moitié du nombre de cartes sur le tapis.
+            if (nb_cartes < nbCartesSurTapis / 2)
             {
-                carte = (PictureBox) sender;
-                i_carte = Convert.ToInt32(carte.Tag);
-                i_image = tapisCARTES[i_carte];
-                carte.Image = imgListe.Images[i_image];
-                if (i_image == i_hasard)
+                carte = (PictureBox) sender;                    // Récupère la carte
+                i_carte = Convert.ToInt32(carte.Tag);           // Récupère l'indice de l'image de la carte séléctionné :
+                                                                // INFO : Il faut trouver un moyen de connaitre l'indice de la zone séléctionné
+                i_image = tImagesCartes[i_carte];               // Récupère l'image correspondant
+                carte.Image = ilSabotDeCartes.Images[i_image];  // Afficher la carte (retourner la carte)
+
+                if (i_carte == i_recherche)
                 {
                     MessageBox.Show("Bravo !");
                 }
                 else
                 {
-                    MessageBox.Show("DOMMAGE !");
-                }
-                if (nb_cartes == 0)
-                {
-                    Image_1 = carte;
-                }
-                if (nb_cartes == 1)
-                {
-                    Image_2 = carte;
+                    MessageBox.Show("Dommage !");
                 }
                 nb_cartes++;
-
             }
             else
             {
-                MessageBox.Show("Deux cartes sont déjà retournées !");
+                MessageBox.Show(String.Format("{0} cartes sont déjà retournées !", nbCartesSurTapis / 2));
                 Retourner();
+
+                // Réinitialisation des valeurs
                 nb_cartes = 0;
                 Image_1 = null;
                 Image_2 = null;
@@ -188,15 +179,28 @@ namespace Memory
             Retourner();
         }
 
-        //ne marche pas manque indice_cartes ERREUR REF
+        private void pb_01_Click(object sender, EventArgs e)
+        {
+            pb_XX_Click(sender, e);
+        }
+
+        private void pb_02_Click(object sender, EventArgs e)
+        {
+            pb_XX_Click(sender, e);
+        }
+
+        private void pb_03_Click(object sender, EventArgs e)
+        {
+            pb_XX_Click(sender, e);
+        }
+
+        private void pb_04_Click(object sender, EventArgs e)
+        {
+            pb_XX_Click(sender, e);
+        }
+
         private void pb_Recherche_Click(object sender, EventArgs e)
         {
-            Random rand = new Random();
-            int choix = rand.Next(nbCartesSurTapis); // je récupère un indice au hasard sur le tapis
-            int carte_choix = indice_cartes[choix]; // je récupère le numéro d'image correspondant à la carte choisie
-            //une fois le numéro récupérée on peut afficher l'image dans le pb :
-            //PictureBox carte;
-            //carte.Image = Images[i_image];
 
         }
     }
