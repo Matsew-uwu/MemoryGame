@@ -33,11 +33,12 @@ namespace Memory
         {
             InitializeComponent();
             // Les cartes sont distribuées et retournées au lancement de l'application
+            Reinitialiser();
             Distribution_Aleatoire();
             Retourner();
         }
 
-        private void reinitialiser()
+        private void Reinitialiser()
         {
             // Réinitialisation des valeurs
             nb_cartes = 0;
@@ -117,7 +118,7 @@ namespace Memory
         
 
         // -- EventHandler pour les boutons --
-        private void btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
+        private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
         {
             Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
         }
@@ -129,10 +130,10 @@ namespace Memory
         }
 
 
-        private void btn_Jouer_Click(object sender, EventArgs e)
+        private void Btn_Jouer_Click(object sender, EventArgs e)
         {
             // Lance le jeu
-            reinitialiser();
+            Reinitialiser();
             Retourner();
             
             // Séléctionne une image aléatoire parmis celles sur le tapis
@@ -141,7 +142,7 @@ namespace Memory
 
         }
 
-        private void btn_Test_Click(object sender, EventArgs e) //bouton de test
+        private void Btn_Test_Click(object sender, EventArgs e) //bouton de test
         {
             // On utilise la LotoMachine pour générer une série aléatoire
             // On fixe à 49 le nombre maxi que retourne la machine
@@ -162,8 +163,15 @@ namespace Memory
 
 
         // -- EventHandler pour chaque PictureBox --
-        private void pb_XX_Click(object sender, EventArgs e, int index) //permet de connaître la carte choisie
+        private void Pb_XX_Click(object sender, EventArgs e, int index) //permet de connaître la carte choisie
         {
+            // Le jeu doit être lancé avant de séléctionner une carte
+            if (i_recherche == 0)
+            {
+                MessageBox.Show("Le jeu n'est pas initialisé");
+                return;
+            }
+
             // Le nombre de carte retourné doit être inférieur à la moitié du nombre de cartes sur le tapis.
             if (nb_cartes < nbCartesSurTapis / 2)
             {
@@ -176,7 +184,7 @@ namespace Memory
                 {
                     MessageBox.Show("Bravo !");
                     // INFO : Retourner/Afficher toutes les cartes
-                    reinitialiser();
+                    Reinitialiser();
                 }
                 else
                 {
@@ -190,32 +198,32 @@ namespace Memory
                 // INFO : Retourner/Afficher toutes les cartes
 
                 // Réinitialisation des valeurs
-                reinitialiser();
+                Reinitialiser();
             }
         }
 
 
-        private void pb_01_Click(object sender, EventArgs e)
+        private void Pb_01_Click(object sender, EventArgs e)
         {
-            pb_XX_Click(sender, e, 0);
+            Pb_XX_Click(sender, e, 0);
         }
 
-        private void pb_02_Click(object sender, EventArgs e)
+        private void Pb_02_Click(object sender, EventArgs e)
         {
-            pb_XX_Click(sender, e, 1);
+            Pb_XX_Click(sender, e, 1);
         }
 
-        private void pb_03_Click(object sender, EventArgs e)
+        private void Pb_03_Click(object sender, EventArgs e)
         {
-            pb_XX_Click(sender, e, 2);
+            Pb_XX_Click(sender, e, 2);
         }
 
-        private void pb_04_Click(object sender, EventArgs e)
+        private void Pb_04_Click(object sender, EventArgs e)
         {
-            pb_XX_Click(sender, e, 3);
+            Pb_XX_Click(sender, e, 3);
         }
 
-        private void pb_Recherche_Click(object sender, EventArgs e)
+        private void Pb_Recherche_Click(object sender, EventArgs e)
         {
 
         }

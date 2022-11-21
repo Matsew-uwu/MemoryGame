@@ -77,7 +77,7 @@
             this.pb_01.Size = new System.Drawing.Size(133, 123);
             this.pb_01.TabIndex = 0;
             this.pb_01.TabStop = false;
-            this.pb_01.Click += new System.EventHandler(this.pb_01_Click);
+            this.pb_01.Click += new System.EventHandler(this.Pb_01_Click);
             // 
             // pb_02
             // 
@@ -88,7 +88,7 @@
             this.pb_02.Size = new System.Drawing.Size(133, 123);
             this.pb_02.TabIndex = 0;
             this.pb_02.TabStop = false;
-            this.pb_02.Click += new System.EventHandler(this.pb_02_Click);
+            this.pb_02.Click += new System.EventHandler(this.Pb_02_Click);
             // 
             // pb_03
             // 
@@ -99,7 +99,7 @@
             this.pb_03.Size = new System.Drawing.Size(133, 123);
             this.pb_03.TabIndex = 0;
             this.pb_03.TabStop = false;
-            this.pb_03.Click += new System.EventHandler(this.pb_03_Click);
+            this.pb_03.Click += new System.EventHandler(this.Pb_03_Click);
             // 
             // pb_04
             // 
@@ -110,7 +110,7 @@
             this.pb_04.Size = new System.Drawing.Size(133, 123);
             this.pb_04.TabIndex = 0;
             this.pb_04.TabStop = false;
-            this.pb_04.Click += new System.EventHandler(this.pb_04_Click);
+            this.pb_04.Click += new System.EventHandler(this.Pb_04_Click);
             // 
             // btn_Distribuer
             // 
@@ -121,7 +121,7 @@
             this.btn_Distribuer.TabIndex = 1;
             this.btn_Distribuer.Text = "DISTRIBUER";
             this.btn_Distribuer.UseVisualStyleBackColor = true;
-            this.btn_Distribuer.Click += new System.EventHandler(this.btn_Distribuer_Click);
+            this.btn_Distribuer.Click += new System.EventHandler(this.Btn_Distribuer_Click);
             // 
             // ilSabotDeCartes
             // 
@@ -178,7 +178,7 @@
             this.btn_Test.TabIndex = 2;
             this.btn_Test.Text = "TEST LotoMachine";
             this.btn_Test.UseVisualStyleBackColor = true;
-            this.btn_Test.Click += new System.EventHandler(this.btn_Test_Click);
+            this.btn_Test.Click += new System.EventHandler(this.Btn_Test_Click);
             // 
             // btn_Retourner
             // 
@@ -200,7 +200,7 @@
             this.btn_Jouer.TabIndex = 4;
             this.btn_Jouer.Text = "JOUER";
             this.btn_Jouer.UseVisualStyleBackColor = true;
-            this.btn_Jouer.Click += new System.EventHandler(this.btn_Jouer_Click);
+            this.btn_Jouer.Click += new System.EventHandler(this.Btn_Jouer_Click);
             // 
             // pb_Recherche
             // 
@@ -211,7 +211,7 @@
             this.pb_Recherche.Size = new System.Drawing.Size(133, 123);
             this.pb_Recherche.TabIndex = 5;
             this.pb_Recherche.TabStop = false;
-            this.pb_Recherche.Click += new System.EventHandler(this.pb_Recherche_Click);
+            this.pb_Recherche.Click += new System.EventHandler(this.Pb_Recherche_Click);
             // 
             // MemoryForm
             // 
