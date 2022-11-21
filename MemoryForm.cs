@@ -112,7 +112,7 @@ namespace Memory
         
         // procédure évenementielle suivante manque initialisation de :nb_cartes;RetournerLesCartes;tapisCARTES;imgListe;i_hasard;Image_1;Image_2;
         //de plus il faut ajouter le pb
-        private void pb_XX_Click(object sender, EventArgs e) //permet de connaître la carte choisie
+        private void pb_XX_Click(object sender, EventArgs e, int index) //permet de connaître la carte choisie
         {
             // Déclaration des variables à utiliser
 
@@ -123,13 +123,11 @@ namespace Memory
             // Le nombre de carte retourné doit être inférieur à la moitié du nombre de cartes sur le tapis.
             if (nb_cartes < nbCartesSurTapis / 2)
             {
-                carte = (PictureBox) sender;                    // Récupère la carte
-                i_carte = Convert.ToInt32(carte.Tag);           // Récupère l'indice de l'image de la carte séléctionné :
-                                                                // INFO : Il faut trouver un moyen de connaitre l'indice de la zone séléctionné
-                i_image = tImagesCartes[i_carte];               // Récupère l'image correspondant
+                carte = (PictureBox) sender;                        // Récupère la carte
+                i_image = tImagesCartes[index + 1];                     // Récupère l'indice de l'image dans la locorrespondant à la carte retournée 
                 carte.Image = ilSabotDeCartes.Images[i_image];  // Afficher la carte (retourner la carte)
 
-                if (i_carte == i_recherche)
+                if (i_image == i_recherche)
                 {
                     MessageBox.Show("Bravo !");
                 }
@@ -181,22 +179,22 @@ namespace Memory
 
         private void pb_01_Click(object sender, EventArgs e)
         {
-            pb_XX_Click(sender, e);
+            pb_XX_Click(sender, e, 0);
         }
 
         private void pb_02_Click(object sender, EventArgs e)
         {
-            pb_XX_Click(sender, e);
+            pb_XX_Click(sender, e, 1);
         }
 
         private void pb_03_Click(object sender, EventArgs e)
         {
-            pb_XX_Click(sender, e);
+            pb_XX_Click(sender, e, 2);
         }
 
         private void pb_04_Click(object sender, EventArgs e)
         {
-            pb_XX_Click(sender, e);
+            pb_XX_Click(sender, e, 3);
         }
 
         private void pb_Recherche_Click(object sender, EventArgs e)
