@@ -67,7 +67,6 @@
             this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTapisDeCartes.Size = new System.Drawing.Size(587, 135);
             this.tlpTapisDeCartes.TabIndex = 0;
-            this.tlpTapisDeCartes.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpTapisDeCartes_Paint);
             // 
             // pb_01
             // 
@@ -78,7 +77,6 @@
             this.pb_01.Size = new System.Drawing.Size(133, 123);
             this.pb_01.TabIndex = 0;
             this.pb_01.TabStop = false;
-            this.pb_01.Click += new System.EventHandler(this.pb_01_Click);
             // 
             // pb_02
             // 
@@ -89,7 +87,6 @@
             this.pb_02.Size = new System.Drawing.Size(133, 123);
             this.pb_02.TabIndex = 0;
             this.pb_02.TabStop = false;
-            this.pb_02.Click += new System.EventHandler(this.pb_02_Click);
             // 
             // pb_03
             // 
@@ -100,7 +97,6 @@
             this.pb_03.Size = new System.Drawing.Size(133, 123);
             this.pb_03.TabIndex = 0;
             this.pb_03.TabStop = false;
-            this.pb_03.Click += new System.EventHandler(this.pb_03_Click);
             // 
             // pb_04
             // 
@@ -111,7 +107,6 @@
             this.pb_04.Size = new System.Drawing.Size(133, 123);
             this.pb_04.TabIndex = 0;
             this.pb_04.TabStop = false;
-            this.pb_04.Click += new System.EventHandler(this.pb_04_Click);
             // 
             // btn_Distribuer
             // 

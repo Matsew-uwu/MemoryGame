@@ -20,9 +20,10 @@ namespace Memory
         int nbCartesSurTapis;           // Nombre de cartes sur le tapis
         List<int> indice_cartes;        // Mémorise les indices cartes générées
         LotoMachine hasard;             // Classe Loto 
-        PictureBox Image_1;             // Les images retournés pendant la partie
+        PictureBox Image_1;             // Les images retournées pendant la partie
         PictureBox Image_2;
         int nb_cartes = 0;              // Nb de carte retourné
+        int[] tImagesCartes;            // Tableau des indices pour les cartes tiré par la classe LotoMachine
 
 
 
@@ -31,63 +32,9 @@ namespace Memory
             InitializeComponent();
         }
 
-        private void tlpTapisDeCartes_Paint(object sender, PaintEventArgs e) // Zone de distribution des cartes
-        {
-
-        }
-
-        private void pb_01_Click(object sender, EventArgs e)
-        {
-            pb_XX_Click(sender, e);
-        }
-
-        private void pb_02_Click(object sender, EventArgs e)
-        {
-            pb_XX_Click(sender, e);
-        }
-
-        private void pb_03_Click(object sender, EventArgs e)
-        {
-            pb_XX_Click(sender, e);
-        }
-
-        private void pb_04_Click(object sender, EventArgs e)
-        {
-            pb_XX_Click(sender, e);
-        }
-
         private void btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
         {
-
-            //ERREUR REF les lignes qui suivent font bug le programme indice_cartes est censé récup le numéro des cartes correspondant aux cartes affichées, définie en tant que var global
-            //elle doit être remise à 0 lorsque l'on redistribue les cartes
-            //elle est mise à jour en ajoutant 1 à 1 les numéros correspondant dans la liste
-            //utile pour mémoriser les cartes avec les bons indices (tableaux- numéros de carte) après les avoir masquer par retourner
-            /*if (indice_cartes.Count==0) { Console.WriteLine("List is Empty"); }
-            else {
-                Console.WriteLine("clear");
-                indice_cartes.Clear(); // A chaque rappel du bouton distribuer on repose de nouvelles cartes, on oublie donc les anciennes cartes pour mémoriser les nouvelles
-            }*/
-            // → CORRECTION
-            indice_cartes = new List<int>();
-
-
-            // -- Appel de la procédure pour la distribution non aléatoire
-            // Distribution_Sequentielle(); 
-
-            // --  Appel de la procédure pour la distribution aléatoire :
-
-            // On récupère le nombre d'images dans le réservoir :
-            nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
-            // On enlève 1 car :
-            // -> la l'image 0 ne compte pas c’est l’image du dos de carte
-            // -> les indices vont de 0 à N-1, donc les indices vont jusqu’à 39
-            // s’il y a 40 images au total *
-            // On récupère également le nombre de cartes à distribuées sur la tapis
-            // autrement dit le nombre de contrôles présents sur le conteneur
-            nbCartesSurTapis = tlpTapisDeCartes.Controls.Count;
-            // Maintenant que nos variables globales sont initialisées on effectue la distribution (aléatoire)
-            Distribution_Aleatoire();
+            Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
         }
 
         private void Distribution_Sequentielle() //distribution basique
@@ -105,15 +52,22 @@ namespace Memory
             }
         }
 
-        private void Distribution_Aleatoire() //distribution aléatoire
+        private void Distribution_Aleatoire() // Distribution aléatoire
         {
-            // On utilise la LotoMachine pour générer une série aléatoire
+            // -- On utilise la classe LotoMachine pour générer une série de carte aléatoire
+            
+            // On initialise le nombre de carte présent dans la loterie
+            nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
+
+            // On initialise le nombre de cartes à distribuer 
+            nbCartesSurTapis = tlpTapisDeCartes.Controls.Count;
+
+            // On initialise la classe avec l'ensemble des cartes
             hasard = new LotoMachine(nbCartesDansSabot);
 
-            // On récupère une série de <nbCartesSurTapis> cartes parmi celles du réservoir
-            // → La série d'entiers retournée par la LotoMachine correspondra aux indices des cartes dans le "sabot"
-
-            int[] tImagesCartes = hasard.TirageAleatoire(nbCartesSurTapis, false);
+            // On récupère une série de <nbCartesSurTapis> cartes parmi celles du Loto
+            // → La série d'entiers retournée par la LotoMachine correspond aux indices des cartes dans le "sabot"
+            tImagesCartes = hasard.TirageAleatoire(nbCartesSurTapis, false);
 
             // Affectation des images sur les picturebox
             PictureBox carte;
@@ -123,20 +77,15 @@ namespace Memory
             {
                 carte = (PictureBox) tlpTapisDeCartes.Controls[i_carte];
 
-                // Il faudrait peut être suppr les images avant d'en mettre de nouvelles pour libérer de la mémoire, ça fait plus propre... INFO
-                // -> J'ai l'impression que si l'on remplace l'image, celle d'avant est supprimé automatiquement
+                // Suppression de l'image pour libérer de la mémoire
                 carte.Image = null;
 
-                i_image = tImagesCartes[i_carte + 1]; // i_carte + 1 à des pbs d'indices
+                // récupère l'image à afficher correspondant
+                i_image = tImagesCartes[i_carte + 1];
 
                 // Placement de l'image
                 carte.Image = ilSabotDeCartes.Images[i_image];
-
-
-                indice_cartes.Add(i_image); //on stock l'image qui a été générée ERREUR REF
-
             }
-
         }
 
         private void btn_Test_Click(object sender, EventArgs e) //bouton de test
@@ -244,7 +193,7 @@ namespace Memory
         {
             Random rand = new Random();
             int choix = rand.Next(nbCartesSurTapis); // je récupère un indice au hasard sur le tapis
-            int carte_choix=indice_cartes[choix]; // je récupère le numéro d'image correspondant à la carte choisie
+            int carte_choix = indice_cartes[choix]; // je récupère le numéro d'image correspondant à la carte choisie
             //une fois le numéro récupérée on peut afficher l'image dans le pb :
             //PictureBox carte;
             //carte.Image = Images[i_image];
