@@ -32,11 +32,19 @@ namespace Memory
         public MemoryForm()
         {
             InitializeComponent();
+            // Les cartes sont distribuées et retournées au lancement de l'application
+            Distribution_Aleatoire();
+            Retourner();
         }
 
-        private void btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
+        private void reinitialiser()
         {
-            Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
+            // Réinitialisation des valeurs
+            nb_cartes = 0;
+            Image_1 = null;
+            Image_2 = null;
+            pb_Recherche.Image = null;
+            i_recherche = 0;
         }
 
         private void Distribution_Sequentielle() //distribution basique
@@ -90,6 +98,49 @@ namespace Memory
             }
         }
 
+        private void Retourner()
+        {
+            // INFO : Faire en sorte que retourner fonctionne dans les deux sens (recto-verso)
+            PictureBox carte;
+            int i_carte = 0; //la carte Doscarte
+            foreach (Control ctrl in tlpTapisDeCartes.Controls) //pour chaque case du tapis, je remplace par DosCarte
+            {
+                // Je sais que le contrôle est une PictureBox
+                // donc je "caste" l'objet (le Contrôle) en PictureBox...
+                carte = (PictureBox)ctrl;
+                // Ensuite je peux accéder à la propriété Image
+                // (je ne pourrais pas si je n'avais pas "casté" le contrôle)
+                carte.Image = ilSabotDeCartes.Images[i_carte];
+            }
+        }
+
+        
+
+        // -- EventHandler pour les boutons --
+        private void btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
+        {
+            Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
+        }
+
+
+        private void btn_Retourner_Click(object sender, EventArgs e)
+        {
+            Retourner();
+        }
+
+
+        private void btn_Jouer_Click(object sender, EventArgs e)
+        {
+            // Lance le jeu
+            reinitialiser();
+            Retourner();
+            
+            // Séléctionne une image aléatoire parmis celles sur le tapis
+            i_recherche = hasard.NumeroAleatoire();
+            pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
+
+        }
+
         private void btn_Test_Click(object sender, EventArgs e) //bouton de test
         {
             // On utilise la LotoMachine pour générer une série aléatoire
@@ -109,27 +160,23 @@ namespace Memory
             MessageBox.Show(grilleLoto, "Tirage du LOTO ce jour !");
         }
 
-        
-        // procédure évenementielle suivante manque initialisation de :nb_cartes;RetournerLesCartes;tapisCARTES;imgListe;i_hasard;Image_1;Image_2;
-        //de plus il faut ajouter le pb
+
+        // -- EventHandler pour chaque PictureBox --
         private void pb_XX_Click(object sender, EventArgs e, int index) //permet de connaître la carte choisie
         {
-            // Déclaration des variables à utiliser
-
-            PictureBox carte;               // L'emplacement de la carte
-            int i_carte;                    // L'indice de la carte dans le tapis
-            int i_image;                    // L'indice de la carte correspondante dans la loterie
-
             // Le nombre de carte retourné doit être inférieur à la moitié du nombre de cartes sur le tapis.
             if (nb_cartes < nbCartesSurTapis / 2)
             {
-                carte = (PictureBox) sender;                        // Récupère la carte
-                i_image = tImagesCartes[index + 1];                     // Récupère l'indice de l'image dans la locorrespondant à la carte retournée 
-                carte.Image = ilSabotDeCartes.Images[i_image];  // Afficher la carte (retourner la carte)
+                PictureBox carte = (PictureBox)sender;                  // Récupère la carte
+                int i_image = tImagesCartes[index + 1];                 // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
+                carte.Image = ilSabotDeCartes.Images[i_image];          // Afficher la carte (retourner la carte)
 
+                // Vérifie si la carte correspond à celle recherché
                 if (i_image == i_recherche)
                 {
                     MessageBox.Show("Bravo !");
+                    // INFO : Retourner/Afficher toutes les cartes
+                    reinitialiser();
                 }
                 else
                 {
@@ -140,42 +187,13 @@ namespace Memory
             else
             {
                 MessageBox.Show(String.Format("{0} cartes sont déjà retournées !", nbCartesSurTapis / 2));
-                Retourner();
+                // INFO : Retourner/Afficher toutes les cartes
 
                 // Réinitialisation des valeurs
-                nb_cartes = 0;
-                Image_1 = null;
-                Image_2 = null;
+                reinitialiser();
             }
         }
 
-        private void btn_Retourner_Click(object sender, EventArgs e)
-        {
-            Retourner();
-        }
-
-        private void Retourner()
-        {
-            // INFO : Faire en sorte que retourner fonctionne dans les deux sens (recto-verso)
-            PictureBox carte;
-            int i_carte = 0; //la carte Doscarte
-            foreach (Control ctrl in tlpTapisDeCartes.Controls) //pour chaque case du tapis, je remplace par DosCarte
-            {
-                // Je sais que le contrôle est une PictureBox
-                // donc je "caste" l'objet (le Contrôle) en PictureBox...
-                carte = (PictureBox) ctrl;
-                // Ensuite je peux accéder à la propriété Image
-                // (je ne pourrais pas si je n'avais pas "casté" le contrôle)
-                carte.Image = ilSabotDeCartes.Images[i_carte];
-            }
-        }
-
-        private void btn_Jouer_Click(object sender, EventArgs e)
-        {
-            Image_1 = null;
-            Image_2 = null;
-            Retourner();
-        }
 
         private void pb_01_Click(object sender, EventArgs e)
         {
