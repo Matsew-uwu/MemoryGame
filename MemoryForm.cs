@@ -26,13 +26,15 @@ namespace Memory
         PictureBox Image_2;
         int nb_cartes = 0;              // Nb de carte retourné
         int[] tImagesCartes;            //tableaux des Cartes retournées
-        Boolean Carte_retournee=false;        //True si carte est retournée false sinon
+        Boolean Carte_retournee=false;  //True si carte est retournée false sinon
+        int i_hasard;                   //Indice de carte au hasard
 
 
 
         public MemoryForm()
         {
             InitializeComponent();
+            Retourner_Invisible();
         }
 
         private void tlpTapisDeCartes_Paint(object sender, PaintEventArgs e) // Zone de distribution des cartes
@@ -73,7 +75,6 @@ namespace Memory
                 indice_cartes.Clear(); // A chaque rappel du bouton distribuer on repose de nouvelles cartes, on oublie donc les anciennes cartes pour mémoriser les nouvelles
             }*/
             // → CORRECTION
-            indice_cartes = new List<int>();
 
 
             // -- Appel de la procédure pour la distribution non aléatoire
@@ -136,10 +137,6 @@ namespace Memory
 
                 // Placement de l'image
                 carte.Image = ilSabotDeCartes.Images[i_image];
-
-
-                indice_cartes.Add(i_image); //on stock l'image qui a été générée ERREUR REF
-
             }
 
         }
@@ -175,8 +172,6 @@ namespace Memory
             List<int> tapisCARTES = indice_cartes;
             ImageList imgListe = ilSabotDeCartes;
 
-            int i_hasard = hasard.NumeroAleatoire();
-
             //if (Image_1 == null)
             // MessageBox.Show("L'image 1 n'est pas référencée");
             //if (Image_2 == null)
@@ -185,7 +180,7 @@ namespace Memory
             {
                 carte = (PictureBox)sender;
                 i_carte = Convert.ToInt32(carte.Tag);
-                i_image = tapisCARTES[i_carte];
+                i_image = tImagesCartes[i_carte];
                 carte.Image = imgListe.Images[i_image];
                 if (i_image == i_hasard)
                 {
@@ -276,24 +271,27 @@ namespace Memory
 
         private void btn_Jouer_Click(object sender, EventArgs e)
         {
+            nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
+            // On enlève 1 car :
+            // -> la l'image 0 ne compte pas c’est l’image du dos de carte
+            // -> les indices vont de 0 à N-1, donc les indices vont jusqu’à 39
+            // s’il y a 40 images au total *
+            // On récupère également le nombre de cartes à distribuées sur la tapis
+            // autrement dit le nombre de contrôles présents sur le conteneur
+            nbCartesSurTapis = tlpTapisDeCartes.Controls.Count;
+            // Maintenant que nos variables globales sont initialisées on effectue la distribution (aléatoire)
             Distribution_Aleatoire();
-            Retourner();
-            PictureBox carte = pb_Recherche;
-            carte= new PictureBox();
-            Random rand = new Random();
-            int choix = rand.Next(nbCartesSurTapis);
-            carte.Image=ilSabotDeCartes.Images[choix];
+            //Retourner();
+            i_hasard = hasard.NumeroAleatoire();
+            PictureBox carte = (PictureBox)pb_Recherche;
+            carte.Image = null;
+            carte.Image = ilSabotDeCartes.Images[i_hasard];
+
         }
 
         //ne marche pas manque indice_cartes ERREUR REF
         private void pb_Recherche_Click(object sender, EventArgs e)
         {
-            Random rand = new Random();
-            int choix = rand.Next(nbCartesSurTapis); // je récupère un indice au hasard sur le tapis
-            int carte_choix=indice_cartes[choix]; // je récupère le numéro d'image correspondant à la carte choisie
-            //une fois le numéro récupérée on peut afficher l'image dans le pb :
-            //PictureBox carte;
-            //carte.Image = Images[i_image];
 
         }
     }

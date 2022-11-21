@@ -60,22 +60,20 @@
             this.tlpTapisDeCartes.Controls.Add(this.pb_02, 1, 0);
             this.tlpTapisDeCartes.Controls.Add(this.pb_03, 2, 0);
             this.tlpTapisDeCartes.Controls.Add(this.pb_04, 3, 0);
-            this.tlpTapisDeCartes.Location = new System.Drawing.Point(85, 78);
-            this.tlpTapisDeCartes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tlpTapisDeCartes.Location = new System.Drawing.Point(64, 63);
             this.tlpTapisDeCartes.Name = "tlpTapisDeCartes";
             this.tlpTapisDeCartes.RowCount = 1;
             this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpTapisDeCartes.Size = new System.Drawing.Size(587, 135);
+            this.tlpTapisDeCartes.Size = new System.Drawing.Size(440, 110);
             this.tlpTapisDeCartes.TabIndex = 0;
             this.tlpTapisDeCartes.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpTapisDeCartes_Paint);
             // 
             // pb_01
             // 
             this.pb_01.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_01.Location = new System.Drawing.Point(4, 4);
-            this.pb_01.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_01.Location = new System.Drawing.Point(3, 3);
             this.pb_01.Name = "pb_01";
-            this.pb_01.Size = new System.Drawing.Size(133, 123);
+            this.pb_01.Size = new System.Drawing.Size(100, 100);
             this.pb_01.TabIndex = 0;
             this.pb_01.TabStop = false;
             this.pb_01.Click += new System.EventHandler(this.pb_01_Click);
@@ -83,10 +81,9 @@
             // pb_02
             // 
             this.pb_02.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_02.Location = new System.Drawing.Point(150, 4);
-            this.pb_02.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_02.Location = new System.Drawing.Point(113, 3);
             this.pb_02.Name = "pb_02";
-            this.pb_02.Size = new System.Drawing.Size(133, 123);
+            this.pb_02.Size = new System.Drawing.Size(100, 100);
             this.pb_02.TabIndex = 0;
             this.pb_02.TabStop = false;
             this.pb_02.Click += new System.EventHandler(this.pb_02_Click);
@@ -94,10 +91,9 @@
             // pb_03
             // 
             this.pb_03.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_03.Location = new System.Drawing.Point(296, 4);
-            this.pb_03.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_03.Location = new System.Drawing.Point(223, 3);
             this.pb_03.Name = "pb_03";
-            this.pb_03.Size = new System.Drawing.Size(133, 123);
+            this.pb_03.Size = new System.Drawing.Size(100, 100);
             this.pb_03.TabIndex = 0;
             this.pb_03.TabStop = false;
             this.pb_03.Click += new System.EventHandler(this.pb_03_Click);
@@ -105,20 +101,18 @@
             // pb_04
             // 
             this.pb_04.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_04.Location = new System.Drawing.Point(442, 4);
-            this.pb_04.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_04.Location = new System.Drawing.Point(333, 3);
             this.pb_04.Name = "pb_04";
-            this.pb_04.Size = new System.Drawing.Size(133, 123);
+            this.pb_04.Size = new System.Drawing.Size(100, 100);
             this.pb_04.TabIndex = 0;
             this.pb_04.TabStop = false;
             this.pb_04.Click += new System.EventHandler(this.pb_04_Click);
             // 
             // btn_Distribuer
             // 
-            this.btn_Distribuer.Location = new System.Drawing.Point(85, 250);
-            this.btn_Distribuer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Distribuer.Location = new System.Drawing.Point(64, 203);
             this.btn_Distribuer.Name = "btn_Distribuer";
-            this.btn_Distribuer.Size = new System.Drawing.Size(113, 28);
+            this.btn_Distribuer.Size = new System.Drawing.Size(85, 23);
             this.btn_Distribuer.TabIndex = 1;
             this.btn_Distribuer.Text = "DISTRIBUER";
             this.btn_Distribuer.UseVisualStyleBackColor = true;
@@ -172,10 +166,9 @@
             // 
             // btn_Test
             // 
-            this.btn_Test.Location = new System.Drawing.Point(831, 36);
-            this.btn_Test.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Test.Location = new System.Drawing.Point(623, 29);
             this.btn_Test.Name = "btn_Test";
-            this.btn_Test.Size = new System.Drawing.Size(163, 28);
+            this.btn_Test.Size = new System.Drawing.Size(122, 23);
             this.btn_Test.TabIndex = 2;
             this.btn_Test.Text = "TEST LotoMachine";
             this.btn_Test.UseVisualStyleBackColor = true;
@@ -183,10 +176,9 @@
             // 
             // btn_Retourner
             // 
-            this.btn_Retourner.Location = new System.Drawing.Point(236, 249);
-            this.btn_Retourner.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Retourner.Location = new System.Drawing.Point(177, 202);
             this.btn_Retourner.Name = "btn_Retourner";
-            this.btn_Retourner.Size = new System.Drawing.Size(116, 28);
+            this.btn_Retourner.Size = new System.Drawing.Size(87, 23);
             this.btn_Retourner.TabIndex = 3;
             this.btn_Retourner.Text = "RETOURNER";
             this.btn_Retourner.UseVisualStyleBackColor = true;
@@ -194,10 +186,9 @@
             // 
             // btn_Jouer
             // 
-            this.btn_Jouer.Location = new System.Drawing.Point(383, 249);
-            this.btn_Jouer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Jouer.Location = new System.Drawing.Point(287, 202);
             this.btn_Jouer.Name = "btn_Jouer";
-            this.btn_Jouer.Size = new System.Drawing.Size(100, 28);
+            this.btn_Jouer.Size = new System.Drawing.Size(75, 23);
             this.btn_Jouer.TabIndex = 4;
             this.btn_Jouer.Text = "JOUER";
             this.btn_Jouer.UseVisualStyleBackColor = true;
@@ -206,27 +197,26 @@
             // pb_Recherche
             // 
             this.pb_Recherche.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.pb_Recherche.Location = new System.Drawing.Point(529, 250);
-            this.pb_Recherche.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_Recherche.Location = new System.Drawing.Point(397, 203);
             this.pb_Recherche.Name = "pb_Recherche";
-            this.pb_Recherche.Size = new System.Drawing.Size(133, 123);
+            this.pb_Recherche.Size = new System.Drawing.Size(100, 100);
             this.pb_Recherche.TabIndex = 5;
             this.pb_Recherche.TabStop = false;
+            this.pb_Recherche.UseWaitCursor = true;
             this.pb_Recherche.Click += new System.EventHandler(this.pb_Recherche_Click);
             // 
             // MemoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pb_Recherche);
             this.Controls.Add(this.btn_Jouer);
             this.Controls.Add(this.btn_Retourner);
             this.Controls.Add(this.btn_Test);
             this.Controls.Add(this.btn_Distribuer);
             this.Controls.Add(this.tlpTapisDeCartes);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MemoryForm";
             this.Text = "Memory";
             this.tlpTapisDeCartes.ResumeLayout(false);
