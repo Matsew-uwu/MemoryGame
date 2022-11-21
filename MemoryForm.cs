@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using dllLoto;
 using static System.Net.Mime.MediaTypeNames;
+
 
 
 namespace Memory
@@ -23,6 +25,8 @@ namespace Memory
         PictureBox Image_1;             // Les images retournés pendant la partie
         PictureBox Image_2;
         int nb_cartes = 0;              // Nb de carte retourné
+        int[] tImagesCartes;            //tableaux des Cartes retournées
+        Boolean Carte_retournee=false;        //True si carte est retournée false sinon
 
 
 
@@ -97,7 +101,7 @@ namespace Memory
             foreach (Control ctrl in tlpTapisDeCartes.Controls)
             {
                 // Caste le contrôle en PictureBox...
-                carte = (PictureBox) ctrl;
+                carte = (PictureBox)ctrl;
                 // Accès à la propriété Image
                 carte.Image = ilSabotDeCartes.Images[i_carte];
                 // Incrémentation de l'indice de l'image
@@ -107,21 +111,22 @@ namespace Memory
 
         private void Distribution_Aleatoire() //distribution aléatoire
         {
+            Carte_retournee = false;
             // On utilise la LotoMachine pour générer une série aléatoire
             hasard = new LotoMachine(nbCartesDansSabot);
 
             // On récupère une série de <nbCartesSurTapis> cartes parmi celles du réservoir
             // → La série d'entiers retournée par la LotoMachine correspondra aux indices des cartes dans le "sabot"
 
-            int[] tImagesCartes = hasard.TirageAleatoire(nbCartesSurTapis, false);
-
+            tImagesCartes = hasard.TirageAleatoire(nbCartesSurTapis, false);
+            Console.WriteLine(tImagesCartes.ToString());
             // Affectation des images sur les picturebox
             PictureBox carte;
             int i_image;
 
             for (int i_carte = 0; i_carte < nbCartesSurTapis; i_carte++)
             {
-                carte = (PictureBox) tlpTapisDeCartes.Controls[i_carte];
+                carte = (PictureBox)tlpTapisDeCartes.Controls[i_carte];
 
                 // Il faudrait peut être suppr les images avant d'en mettre de nouvelles pour libérer de la mémoire, ça fait plus propre... INFO
                 // -> J'ai l'impression que si l'on remplace l'image, celle d'avant est supprimé automatiquement
@@ -158,7 +163,7 @@ namespace Memory
             MessageBox.Show(grilleLoto, "Tirage du LOTO ce jour !");
         }
 
-        
+
         // procédure évenementielle suivante manque initialisation de :nb_cartes;RetournerLesCartes;tapisCARTES;imgListe;i_hasard;Image_1;Image_2;
         //de plus il faut ajouter le pb
         private void pb_XX_Click(object sender, EventArgs e) //permet de connaître la carte choisie
@@ -178,7 +183,7 @@ namespace Memory
             // MessageBox.Show("L'image 2 n'est pas référencée");
             if (nb_cartes < 2)
             {
-                carte = (PictureBox) sender;
+                carte = (PictureBox)sender;
                 i_carte = Convert.ToInt32(carte.Tag);
                 i_image = tapisCARTES[i_carte];
                 carte.Image = imgListe.Images[i_image];
@@ -218,25 +223,66 @@ namespace Memory
 
         private void Retourner()
         {
-            // INFO : Faire en sorte que retourner fonctionne dans les deux sens (recto-verso)
-            PictureBox carte;
-            int i_carte = 0; //la carte Doscarte
-            foreach (Control ctrl in tlpTapisDeCartes.Controls) //pour chaque case du tapis, je remplace par DosCarte
+            // INFO : retourner fonctionne dans les deux sens (recto-verso)
+            if (Carte_retournee)
             {
-                // Je sais que le contrôle est une PictureBox
-                // donc je "caste" l'objet (le Contrôle) en PictureBox...
-                carte = (PictureBox) ctrl;
-                // Ensuite je peux accéder à la propriété Image
-                // (je ne pourrais pas si je n'avais pas "casté" le contrôle)
-                carte.Image = ilSabotDeCartes.Images[i_carte];
+                Retourner_Visible();
+            }
+
+
+            else
+            {
+                Retourner_Invisible();
             }
         }
 
+        private void Retourner_Visible()
+        {
+            PictureBox carte;
+            Carte_retournee = false;
+            for (int i = 0; i < nbCartesSurTapis; ++i)
+            {
+                carte = (PictureBox)tlpTapisDeCartes.Controls[i];
+                //Suppression image avant d'en poser une nouvelle
+                carte.Image = null;
+                //Parcourir les indices correspondants aux images qui avaient été affichées avant d'être retournée
+                int i_cartes = tImagesCartes[i + 1];
+                //Rafficher les images sur les Picturboxs associées.
+                carte.Image = ilSabotDeCartes.Images[i_cartes];
+            }
+        }
+
+        private void Retourner_Invisible()
+        {
+            PictureBox carte;
+            Carte_retournee = true;
+            foreach (Control ctrl in tlpTapisDeCartes.Controls) //pour chaque case du tapis, je remplace par DosCarte
+            {
+                // Je sais que le contrôle est une PictureBox
+                // donc je "caste" l'objet (le Contrôle) en PictureBox et on supprime l'image éventuelle
+                carte = (PictureBox)ctrl;
+                carte.Image = null;
+                // Ensuite je peux accéder à la propriété Image
+                // (je ne pourrais pas si je n'avais pas "casté" le contrôle)
+                //On remplace toutes les images du tapis par l'images dos de carte (l'image d'indice 0)
+                carte.Image = ilSabotDeCartes.Images[0];
+            }
+        }
+
+
+
+
+
+
         private void btn_Jouer_Click(object sender, EventArgs e)
         {
-            Image_1 = null;
-            Image_2 = null;
+            Distribution_Aleatoire();
             Retourner();
+            PictureBox carte = pb_Recherche;
+            carte= new PictureBox();
+            Random rand = new Random();
+            int choix = rand.Next(nbCartesSurTapis);
+            carte.Image=ilSabotDeCartes.Images[choix];
         }
 
         //ne marche pas manque indice_cartes ERREUR REF
