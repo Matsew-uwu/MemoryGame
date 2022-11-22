@@ -271,7 +271,7 @@ namespace Memory
 
         private void btn_Jouer_Click(object sender, EventArgs e)
         {
-            nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
+            /*nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
             // On enlève 1 car :
             // -> la l'image 0 ne compte pas c’est l’image du dos de carte
             // -> les indices vont de 0 à N-1, donc les indices vont jusqu’à 39
@@ -280,7 +280,7 @@ namespace Memory
             // autrement dit le nombre de contrôles présents sur le conteneur
             nbCartesSurTapis = tlpTapisDeCartes.Controls.Count;
             // Maintenant que nos variables globales sont initialisées on effectue la distribution (aléatoire)
-            Distribution_Aleatoire();
+            Distribution_Aleatoire();*/
             //Retourner();
             i_hasard = hasard.NumeroAleatoire();
             PictureBox carte = (PictureBox)pb_Recherche;
