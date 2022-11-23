@@ -222,10 +222,5 @@ namespace Memory
         {
             Pb_XX_Click(sender, e, 3);
         }
-
-        private void Pb_Recherche_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

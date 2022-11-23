@@ -211,7 +211,6 @@
             this.pb_Recherche.Size = new System.Drawing.Size(133, 123);
             this.pb_Recherche.TabIndex = 5;
             this.pb_Recherche.TabStop = false;
-            this.pb_Recherche.Click += new System.EventHandler(this.Pb_Recherche_Click);
             // 
             // MemoryForm
             // 
