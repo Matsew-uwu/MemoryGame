@@ -27,6 +27,8 @@ namespace Memory
         PictureBox Image_2;
         int nb_cartes = 0;              // Nb de carte retourné
 
+        Boolean carte_retournee;        // true si la carte est retournée (de dos) ; false autrement
+
 
 
         public MemoryForm()
@@ -35,7 +37,7 @@ namespace Memory
             // Les cartes sont distribuées et retournées au lancement de l'application
             Reinitialiser();
             Distribution_Aleatoire();
-            Retourner();
+            Retourner_Dos();
         }
 
         private void Reinitialiser()
@@ -99,34 +101,62 @@ namespace Memory
             }
         }
 
-        private void Retourner()
+        private void Retourner_Visible()
         {
-            // INFO : Faire en sorte que retourner fonctionne dans les deux sens (recto-verso)
             PictureBox carte;
-            int i_carte = 0; //la carte Doscarte
+            for (int i = 0; i < nbCartesSurTapis; ++i)
+            {
+                carte = (PictureBox) tlpTapisDeCartes.Controls[i];
+                //Suppression image avant d'en poser une nouvelle
+                carte.Image = null;
+
+                //Parcourir les indices correspondants aux images des cartes retournées
+                int i_cartes = tImagesCartes[i + 1];
+
+                // Afficher les images sur les Picturbox associées.
+                carte.Image = ilSabotDeCartes.Images[i_cartes];
+            }
+            carte_retournee = false;
+        }
+
+        private void Retourner_Dos()
+        {
+            PictureBox carte;
             foreach (Control ctrl in tlpTapisDeCartes.Controls) //pour chaque case du tapis, je remplace par DosCarte
             {
-                // Je sais que le contrôle est une PictureBox
-                // donc je "caste" l'objet (le Contrôle) en PictureBox...
-                carte = (PictureBox)ctrl;
-                // Ensuite je peux accéder à la propriété Image
-                // (je ne pourrais pas si je n'avais pas "casté" le contrôle)
-                carte.Image = ilSabotDeCartes.Images[i_carte];
+                carte = (PictureBox) ctrl;
+                carte.Image = ilSabotDeCartes.Images[0]; //la carte "Doscarte"
+            }
+
+            carte_retournee = true; // Indique que la carte est retournée
+        }
+
+        private void Retourner()
+        {
+            // Retourne la carte
+            if (carte_retournee)
+            {
+                Retourner_Visible();
+            }
+            else
+            {
+                Retourner_Dos();
             }
         }
 
-        
+
 
         // -- EventHandler pour les boutons --
         private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
         {
+            Reinitialiser();
             Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
         }
 
 
         private void btn_Retourner_Click(object sender, EventArgs e)
         {
-            Retourner();
+            Retourner_Dos();
         }
 
 
@@ -134,7 +164,7 @@ namespace Memory
         {
             // Lance le jeu
             Reinitialiser();
-            Retourner();
+            Retourner_Dos();
             
             // Séléctionne une image aléatoire parmis celles sur le tapis
             i_recherche = hasard.NumeroAleatoire();
@@ -142,7 +172,8 @@ namespace Memory
 
         }
 
-        private void Btn_Test_Click(object sender, EventArgs e) //bouton de test
+        // Bouton de test pour la loterie fournis de base
+        private void Btn_Test_Click(object sender, EventArgs e) 
         {
             // On utilise la LotoMachine pour générer une série aléatoire
             // On fixe à 49 le nombre maxi que retourne la machine
@@ -183,8 +214,9 @@ namespace Memory
                 if (i_image == i_recherche)
                 {
                     MessageBox.Show("Bravo !");
-                    // INFO : Retourner/Afficher toutes les cartes
                     Reinitialiser();
+                    // Retourner/Afficher toutes les cartes
+                    Retourner_Visible();
                 }
                 else
                 {
@@ -195,10 +227,11 @@ namespace Memory
             else
             {
                 MessageBox.Show(String.Format("{0} cartes sont déjà retournées !", nbCartesSurTapis / 2));
-                // INFO : Retourner/Afficher toutes les cartes
 
                 // Réinitialisation des valeurs
                 Reinitialiser();
+                // Retourner/Afficher toutes les cartes
+                Retourner_Visible();
             }
         }
 
