@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -215,14 +216,26 @@ namespace Memory
                 // Vérifie si la carte correspond à celle recherché
                 if (i_image == i_recherche)
                 {
-                    MessageBox.Show("Bravo !");
+                    Random rand = new Random();
+                    int alea = rand.Next(1, 5);
+                    //>= et <= sont des blindages
+                    if (alea <= 1) { MessageBox.Show("Bravo !");}
+                    if (alea == 2) { MessageBox.Show("génial !"); }
+                    if (alea == 3) { MessageBox.Show("Trop fort !"); }
+                    if (alea >= 4) { MessageBox.Show("Eclair au chocolat"); }
                     Reinitialiser();
                     // Retourner/Afficher toutes les cartes
                     Retourner_Visible();
                 }
                 else
                 {
-                    MessageBox.Show("Dommage !");
+                    Random rand = new Random();
+                    int alea = rand.Next(1, 5);
+                    //>= et <= sont des blindages
+                    if (alea <= 1) { MessageBox.Show("Dommage !"); }
+                    if (alea == 2) { MessageBox.Show("Si nul !"); }
+                    if (alea == 3) { MessageBox.Show("Vous êtes mauvais !"); }
+                    if (alea >= 4) { MessageBox.Show("Tarte aux pommes"); }
                 }
                 nb_cartes++;
             }
@@ -273,8 +286,8 @@ namespace Memory
 
             Reinitialiser();
             Distribution_Aleatoire();
-            //temps_arret();//On laisse 5s le temps de mémoriser
-            Retourner_Dos();
+            temps_arret();//On laisse 5s le temps de mémoriser
+            //Retourner_Dos();
             //Séléctionne une image aléatoire parmis celles sur le tapis
             i_recherche = hasard.NumeroAleatoire();
             //affiche l'image sur la zone dédiée
