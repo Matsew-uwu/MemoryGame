@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dllLoto;
@@ -168,6 +169,7 @@ namespace Memory
             
             // Séléctionne une image aléatoire parmis celles sur le tapis
             i_recherche = hasard.NumeroAleatoire();
+            //affiche l'image sur la zone dédiée
             pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
 
         }
@@ -254,6 +256,52 @@ namespace Memory
         private void Pb_04_Click(object sender, EventArgs e)
         {
             Pb_XX_Click(sender, e, 3);
+        }
+
+        private void btn_mortel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_normal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_facile_Click(object sender, EventArgs e)
+        {
+
+            Reinitialiser();
+            Distribution_Aleatoire();
+            //temps_arret();//On laisse 5s le temps de mémoriser
+            Retourner_Dos();
+            //Séléctionne une image aléatoire parmis celles sur le tapis
+            i_recherche = hasard.NumeroAleatoire();
+            //affiche l'image sur la zone dédiée
+            pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
+        }
+        private void temps_arret() //arrêt de 5secondes
+        {
+            Thread.Sleep(5000);
+        }
+        private void pb_05_Click(object sender, EventArgs e)
+        {
+            Pb_XX_Click(sender, e, 4);
+        }
+
+        private void pb_06_Click(object sender, EventArgs e)
+        {
+            Pb_XX_Click(sender, e, 5);
+        }
+
+        private void pb_07_Click(object sender, EventArgs e)
+        {
+            Pb_XX_Click(sender, e, 6);
+        }
+
+        private void pb_08_Click(object sender, EventArgs e)
+        {
+            Pb_XX_Click(sender, e, 7);
         }
     }
 }
