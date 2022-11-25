@@ -43,8 +43,6 @@ namespace Memory
             InitializeComponent();
             // Des cartes sont distribuées et retournées au lancement de l'application
             Reinitialiser();
-            Distribution_Aleatoire();
-            Retourner_Dos();
         }
 
         private void Reinitialiser()
@@ -102,7 +100,13 @@ namespace Memory
 
             // On récupère une série de <nbCartesSurTapis> cartes parmi celles du Loto
             // → La série d'entiers retournée par la LotoMachine correspond aux indices des cartes dans le "sabot"
-            tImagesCartes = hasard.TirageAleatoire(nbCartesSurTapis, false);
+            List<int> cartes = new List<int>(hasard.TirageAleatoire(nbCartesSurTapis, false));
+            cartes.RemoveAt(0);
+
+            tImagesCartes = new int[(nbCartesSurTapis)];
+            cartes.CopyTo(tImagesCartes, 0);
+
+            tImagesCartes = shuffle(tImagesCartes);
 
             // Affectation des images sur les picturebox
             PictureBox carte;
@@ -116,7 +120,7 @@ namespace Memory
                 carte.Image = null;
 
                 // récupère l'image à afficher correspondant
-                i_image = tImagesCartes[i_carte + 1];
+                i_image = tImagesCartes[i_carte];
 
                 // Placement de l'image
                 carte.Image = ilSabotDeCartes.Images[i_image];
@@ -179,7 +183,7 @@ namespace Memory
                 carte.Image = null;
 
                 //Parcourir les indices correspondants aux images des cartes retournées
-                int i_cartes = tImagesCartes[i + 1]; // La première carte est la carte 'Dos'
+                int i_cartes = tImagesCartes[i]; // La première carte est la carte 'Dos'
                 
                 // Afficher les images sur les Picturbox associées.
                 carte.Image = ilSabotDeCartes.Images[i_cartes];
@@ -356,7 +360,7 @@ namespace Memory
             if (nb_cartes < nbCartesSurTapis / 2)
             {
                 PictureBox carte = (PictureBox)sender;                  // Récupère la carte
-                int i_image = tImagesCartes[index + 1];                 // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
+                int i_image = tImagesCartes[index];                 // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
                 carte.Image = ilSabotDeCartes.Images[i_image];          // Afficher la carte (retourner la carte)
 
                 // Vérifie si la carte correspond à celle recherché
