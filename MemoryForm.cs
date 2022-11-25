@@ -38,7 +38,7 @@ namespace Memory
         public MemoryForm()
         {
             InitializeComponent();
-            // Les cartes sont distribuées et retournées au lancement de l'application
+            // Des cartes sont distribuées et retournées au lancement de l'application
             Reinitialiser();
             Distribution_Aleatoire();
             Retourner_Dos();
@@ -58,6 +58,7 @@ namespace Memory
         }
 
         public int[] shuffle(int[] arr)
+        /* Fonction qui permet de mélanger les éléments d'une liste */
         {
             Random random = new Random();
             arr = arr.OrderBy(x => random.Next()).ToArray();
@@ -68,7 +69,7 @@ namespace Memory
             return arr;
         }
 
-        private void Distribution_Sequentielle() //distribution basique
+        private void Distribution_Sequentielle() // Distribution basique
         {
             PictureBox carte;
             int i_carte = 1;
@@ -121,6 +122,9 @@ namespace Memory
 
         private void Distribution_Aleatoire_Memory() // Distribution aléatoire
         {
+            /* Fonctionne de manière similaire à la distribution aléatoire classique, sauf que chaque carte est en doublon */
+
+
             // -- On utilise la classe LotoMachine pour générer une série de carte aléatoire
 
             // On initialise le nombre de carte présent dans la loterie
@@ -172,7 +176,7 @@ namespace Memory
                 carte.Image = null;
 
                 //Parcourir les indices correspondants aux images des cartes retournées
-                int i_cartes = tImagesCartes[i + 1];
+                int i_cartes = tImagesCartes[i];
 
                 // Afficher les images sur les Picturbox associées.
                 carte.Image = ilSabotDeCartes.Images[i_cartes];
@@ -240,30 +244,17 @@ namespace Memory
         // Bouton de test pour la loterie fournis de base
         private void Btn_Test_Click(object sender, EventArgs e) 
         {
-            /*// On utilise la LotoMachine pour générer une série aléatoire
-            // On fixe à 49 le nombre maxi que retourne la machine
-            LotoMachine hasard = new LotoMachine(49);
-            // On veut une série de 6 numéros distincts parmi 49 (comme quand on joue au loto)
-            int[] tirageLoto = hasard.TirageAleatoire(6, false);
-            // false veut dire pas de doublon : une fois qu'une boule est sortie,
-            // elle ne peut pas sortir à nouveau
-            // La série d'entiers retournée par la LotoMachine correspond au loto
-            // affiché sur votre écran TV ce soir...
-            string grilleLoto = "* ";
-            for (int i = 1; i <= 6; i++)
-            {
-                grilleLoto = grilleLoto + tirageLoto[i] + " * ";
-            }
-            MessageBox.Show(grilleLoto, "Tirage du LOTO ce jour !");*/
-
             Distribution_Aleatoire_Memory();
         }
 
        
 
         // -- EventHandler pour chaque PictureBox --
-        private void Pb_XX_Click(object sender, EventArgs e, int index) //permet de connaître la carte choisie
+
+        private  void Memory_V1_Handler(object sender, EventArgs e, int index)
         {
+            /* Gestion de la version 1 du jeu */
+
             // Le jeu doit être lancé avant de séléctionner une carte
             if (!inGame)
             {
@@ -274,12 +265,12 @@ namespace Memory
             if (Image_1 == 0)
             {
                 Image_1 = tImagesCartes[index];                 // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
-                PbImage1 = (PictureBox) sender;                     // Récupère la carte
+                PbImage1 = (PictureBox)sender;                     // Récupère la carte
                 PbImage1.Image = ilSabotDeCartes.Images[Image_1];   // Afficher la carte (retourner la carte)
             }
 
             // Le nombre de carte retourné doit être inférieur à la moitié du nombre de cartes sur le tapis.
-            else 
+            else
             {
                 Image_2 = tImagesCartes[index];                 // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
                 PbImage2 = (PictureBox)sender;                      // Récupère la carte
@@ -304,7 +295,7 @@ namespace Memory
                     PbImage2.Image = ilSabotDeCartes.Images[0];
                 }
             }
-            
+
             if (nb_cartes == nbCartesSurTapis)
             {
                 MessageBox.Show("Vous avez terminé la partie !");
@@ -315,6 +306,17 @@ namespace Memory
             }
         }
 
+        private void Memory_V2_Handler(object sender, EventArgs e, int index)
+        {
+            //
+            return;
+        }
+
+
+        private void Pb_XX_Click(object sender, EventArgs e, int index) //permet de connaître la carte choisie
+        {
+            Memory_V1_Handler(sender, e, index);
+        }
 
         private void Pb_01_Click(object sender, EventArgs e)
         {
