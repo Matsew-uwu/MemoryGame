@@ -345,6 +345,8 @@ namespace Memory
                 MessageBox.Show("Vous avez terminé la partie !");
                 // Retourner/Afficher toutes les cartes
                 Retourner_Dos();
+                // Réinitialisation du jeu
+                Reinitialiser();
             }
         }
 
