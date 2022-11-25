@@ -204,6 +204,18 @@ namespace Memory
             cartes_retournees = true; // Indique que la carte est retournée
         }
 
+        private void ClearTapis()
+        {
+            PictureBox carte;
+            foreach (Control ctrl in tlpTapisDeCartes.Controls) //pour chaque case du tapis, je remplace par DosCarte
+            {
+                carte = (PictureBox)ctrl;
+                carte.Image = null; //la carte "Doscarte"
+            }
+
+            cartes_retournees = true; // Indique que la carte est retournée
+        }
+
         private void RetournerCartes()
         {
             // Retourne la carte
@@ -348,7 +360,7 @@ namespace Memory
             {
                 MessageBox.Show("Vous avez terminé la partie !");
                 // Retourner/Afficher toutes les cartes
-                Retourner_Dos();
+                ClearTapis();
                 // Réinitialisation du jeu
                 Reinitialiser();
             }
