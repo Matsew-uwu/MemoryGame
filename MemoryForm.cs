@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dllLoto;
@@ -41,7 +37,6 @@ namespace Memory
             InitializeComponent();
             // Des cartes sont distribuées et retournées au lancement de l'application
             Reinitialiser();
-            foreach (Control c in tlpTapisDeCartes.Controls) Console.WriteLine(c.Name);
         }
 
         private void Reinitialiser()
@@ -62,10 +57,6 @@ namespace Memory
         {
             Random random = new Random();
             arr = arr.OrderBy(x => random.Next()).ToArray();
-            foreach (var i in arr)
-            {
-                Console.WriteLine(i);
-            }
             return arr;
         }
 
@@ -270,6 +261,7 @@ namespace Memory
             // Lance le jeu
             Reinitialiser();
             Distribution_Aleatoire_Memory();
+            await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
             Retourner_Dos();
 
             // -- Version 2 --
@@ -423,7 +415,7 @@ namespace Memory
             // Le jeu doit être lancé avant de séléctionner une carte
             if (!inGame)
             {
-                MessageBox.Show("Aucune partie n'est lancée");
+                MessageBox.Show("Aucune partie n'est lancée", "Avertissement", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -436,7 +428,7 @@ namespace Memory
                     Memory_V2_Handler(sender, e, index);
                     break;
                 default:
-                    Console.WriteLine(mode);
+                    MessageBox.Show("Une erreur est survenue lors de la séléction du mode de jeu", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
         }
@@ -481,4 +473,14 @@ namespace Memory
             Pb_XX_Click(sender, e, 7);
         }
     }
+
+    // TODO :
+    // - Gérer le fait qu'on puisse cliquer deux fois sur la même carte (c'est un glitch sinon)
+    // - Transfomer les boutons pour le choix du niveau en combobox (DropdownList)
+    // - Rendre l'interface plus ergonomique (Il faut qu'on sache directement comment le jeu fonctionne)
+    // - Vérifier la documentation
+
+    // BUG / Failles 
+    // - Lors de l'appuie répétitif sur le bouton "facile" .. Le delay est toujours pris en compte donc les cartes vont s'afficher successibement dans pb_recherche au bout d'un certain temps
+    // - Appuyer deux fois sur la même carte compte comme des appuies distinct (et donc deux cartes identiques)
 }
