@@ -5,13 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dllLoto;
-using static System.Net.Mime.MediaTypeNames;
 
 
 namespace Memory
@@ -275,10 +272,6 @@ namespace Memory
             i_recherche = hasard.NumeroAleatoire();
             //affiche l'image sur la zone dédiée
             pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
-        }
-        private void temps_arret() //arrêt de 5secondes
-        {
-            Thread.Sleep(5000);
         }
 
         private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
