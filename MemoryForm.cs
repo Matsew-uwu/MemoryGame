@@ -43,6 +43,7 @@ namespace Memory
             InitializeComponent();
             // Des cartes sont distribuées et retournées au lancement de l'application
             Reinitialiser();
+            foreach (Control c in tlpTapisDeCartes.Controls) Console.WriteLine(c.Name);
         }
 
         private void Reinitialiser()
@@ -472,5 +473,7 @@ namespace Memory
         {
             Pb_XX_Click(sender, e, 7);
         }
+
+        // Remarque importante : Dans le TLP les 4 derniers PictureBox ne sont plus dans le bon ordre. L'ordre est le suivant [Pb1, Pb2, Pb3, Pb4, Pb6, Pb7, Pb8]
     }
 }

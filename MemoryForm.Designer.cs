@@ -53,17 +53,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb_02)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_01)).BeginInit();
             this.tlpTapisDeCartes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_06)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_07)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_08)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_07)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_06)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_05)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Distribuer
             // 
-            this.btn_Distribuer.Location = new System.Drawing.Point(671, 34);
+            this.btn_Distribuer.Location = new System.Drawing.Point(895, 42);
+            this.btn_Distribuer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_Distribuer.Name = "btn_Distribuer";
-            this.btn_Distribuer.Size = new System.Drawing.Size(85, 23);
+            this.btn_Distribuer.Size = new System.Drawing.Size(113, 28);
             this.btn_Distribuer.TabIndex = 1;
             this.btn_Distribuer.Text = "DISTRIBUER";
             this.btn_Distribuer.UseVisualStyleBackColor = true;
@@ -117,9 +118,10 @@
             // 
             // btn_Retourner
             // 
-            this.btn_Retourner.Location = new System.Drawing.Point(671, 66);
+            this.btn_Retourner.Location = new System.Drawing.Point(895, 81);
+            this.btn_Retourner.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_Retourner.Name = "btn_Retourner";
-            this.btn_Retourner.Size = new System.Drawing.Size(87, 23);
+            this.btn_Retourner.Size = new System.Drawing.Size(116, 28);
             this.btn_Retourner.TabIndex = 3;
             this.btn_Retourner.Text = "RETOURNER";
             this.btn_Retourner.UseVisualStyleBackColor = true;
@@ -127,9 +129,10 @@
             // 
             // btn_Jouer
             // 
-            this.btn_Jouer.Location = new System.Drawing.Point(287, 319);
+            this.btn_Jouer.Location = new System.Drawing.Point(383, 393);
+            this.btn_Jouer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_Jouer.Name = "btn_Jouer";
-            this.btn_Jouer.Size = new System.Drawing.Size(75, 23);
+            this.btn_Jouer.Size = new System.Drawing.Size(100, 28);
             this.btn_Jouer.TabIndex = 4;
             this.btn_Jouer.Text = "JOUER";
             this.btn_Jouer.UseVisualStyleBackColor = true;
@@ -138,18 +141,20 @@
             // pb_Recherche
             // 
             this.pb_Recherche.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.pb_Recherche.Location = new System.Drawing.Point(623, 264);
+            this.pb_Recherche.Location = new System.Drawing.Point(831, 325);
+            this.pb_Recherche.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pb_Recherche.Name = "pb_Recherche";
-            this.pb_Recherche.Size = new System.Drawing.Size(100, 100);
+            this.pb_Recherche.Size = new System.Drawing.Size(133, 123);
             this.pb_Recherche.TabIndex = 5;
             this.pb_Recherche.TabStop = false;
             // 
             // pb_04
             // 
             this.pb_04.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_04.Location = new System.Drawing.Point(333, 3);
+            this.pb_04.Location = new System.Drawing.Point(442, 4);
+            this.pb_04.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pb_04.Name = "pb_04";
-            this.pb_04.Size = new System.Drawing.Size(100, 100);
+            this.pb_04.Size = new System.Drawing.Size(133, 123);
             this.pb_04.TabIndex = 0;
             this.pb_04.TabStop = false;
             this.pb_04.Click += new System.EventHandler(this.Pb_04_Click);
@@ -157,9 +162,10 @@
             // pb_03
             // 
             this.pb_03.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_03.Location = new System.Drawing.Point(223, 3);
+            this.pb_03.Location = new System.Drawing.Point(296, 4);
+            this.pb_03.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pb_03.Name = "pb_03";
-            this.pb_03.Size = new System.Drawing.Size(100, 100);
+            this.pb_03.Size = new System.Drawing.Size(133, 123);
             this.pb_03.TabIndex = 0;
             this.pb_03.TabStop = false;
             this.pb_03.Click += new System.EventHandler(this.Pb_03_Click);
@@ -167,9 +173,10 @@
             // pb_02
             // 
             this.pb_02.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_02.Location = new System.Drawing.Point(113, 3);
+            this.pb_02.Location = new System.Drawing.Point(150, 4);
+            this.pb_02.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pb_02.Name = "pb_02";
-            this.pb_02.Size = new System.Drawing.Size(100, 100);
+            this.pb_02.Size = new System.Drawing.Size(133, 123);
             this.pb_02.TabIndex = 0;
             this.pb_02.TabStop = false;
             this.pb_02.Click += new System.EventHandler(this.Pb_02_Click);
@@ -177,9 +184,10 @@
             // pb_01
             // 
             this.pb_01.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_01.Location = new System.Drawing.Point(3, 3);
+            this.pb_01.Location = new System.Drawing.Point(4, 4);
+            this.pb_01.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pb_01.Name = "pb_01";
-            this.pb_01.Size = new System.Drawing.Size(100, 100);
+            this.pb_01.Size = new System.Drawing.Size(133, 123);
             this.pb_01.TabIndex = 0;
             this.pb_01.TabStop = false;
             this.pb_01.Click += new System.EventHandler(this.Pb_01_Click);
@@ -195,24 +203,26 @@
             this.tlpTapisDeCartes.Controls.Add(this.pb_02, 1, 0);
             this.tlpTapisDeCartes.Controls.Add(this.pb_03, 2, 0);
             this.tlpTapisDeCartes.Controls.Add(this.pb_04, 3, 0);
+            this.tlpTapisDeCartes.Controls.Add(this.pb_05, 0, 1);
             this.tlpTapisDeCartes.Controls.Add(this.pb_06, 1, 1);
             this.tlpTapisDeCartes.Controls.Add(this.pb_07, 2, 1);
             this.tlpTapisDeCartes.Controls.Add(this.pb_08, 3, 1);
-            this.tlpTapisDeCartes.Controls.Add(this.pb_05, 0, 1);
-            this.tlpTapisDeCartes.Location = new System.Drawing.Point(64, 63);
+            this.tlpTapisDeCartes.Location = new System.Drawing.Point(85, 78);
+            this.tlpTapisDeCartes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tlpTapisDeCartes.Name = "tlpTapisDeCartes";
             this.tlpTapisDeCartes.RowCount = 2;
             this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 112F));
-            this.tlpTapisDeCartes.Size = new System.Drawing.Size(440, 220);
+            this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 138F));
+            this.tlpTapisDeCartes.Size = new System.Drawing.Size(587, 271);
             this.tlpTapisDeCartes.TabIndex = 0;
             // 
             // pb_06
             // 
             this.pb_06.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_06.Location = new System.Drawing.Point(113, 111);
+            this.pb_06.Location = new System.Drawing.Point(150, 137);
+            this.pb_06.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pb_06.Name = "pb_06";
-            this.pb_06.Size = new System.Drawing.Size(100, 100);
+            this.pb_06.Size = new System.Drawing.Size(133, 123);
             this.pb_06.TabIndex = 2;
             this.pb_06.TabStop = false;
             this.pb_06.Click += new System.EventHandler(this.pb_06_Click);
@@ -220,9 +230,10 @@
             // pb_07
             // 
             this.pb_07.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_07.Location = new System.Drawing.Point(223, 111);
+            this.pb_07.Location = new System.Drawing.Point(296, 137);
+            this.pb_07.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pb_07.Name = "pb_07";
-            this.pb_07.Size = new System.Drawing.Size(100, 100);
+            this.pb_07.Size = new System.Drawing.Size(133, 123);
             this.pb_07.TabIndex = 3;
             this.pb_07.TabStop = false;
             this.pb_07.Click += new System.EventHandler(this.pb_07_Click);
@@ -230,9 +241,10 @@
             // pb_08
             // 
             this.pb_08.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_08.Location = new System.Drawing.Point(333, 111);
+            this.pb_08.Location = new System.Drawing.Point(442, 137);
+            this.pb_08.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pb_08.Name = "pb_08";
-            this.pb_08.Size = new System.Drawing.Size(100, 100);
+            this.pb_08.Size = new System.Drawing.Size(133, 123);
             this.pb_08.TabIndex = 4;
             this.pb_08.TabStop = false;
             this.pb_08.Click += new System.EventHandler(this.pb_08_Click);
@@ -240,18 +252,20 @@
             // pb_05
             // 
             this.pb_05.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_05.Location = new System.Drawing.Point(3, 111);
+            this.pb_05.Location = new System.Drawing.Point(4, 137);
+            this.pb_05.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pb_05.Name = "pb_05";
-            this.pb_05.Size = new System.Drawing.Size(100, 100);
+            this.pb_05.Size = new System.Drawing.Size(133, 123);
             this.pb_05.TabIndex = 1;
             this.pb_05.TabStop = false;
             this.pb_05.Click += new System.EventHandler(this.pb_05_Click);
             // 
             // btn_facile
             // 
-            this.btn_facile.Location = new System.Drawing.Point(671, 143);
+            this.btn_facile.Location = new System.Drawing.Point(895, 176);
+            this.btn_facile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_facile.Name = "btn_facile";
-            this.btn_facile.Size = new System.Drawing.Size(75, 23);
+            this.btn_facile.Size = new System.Drawing.Size(100, 28);
             this.btn_facile.TabIndex = 6;
             this.btn_facile.Text = "Facile";
             this.btn_facile.UseVisualStyleBackColor = true;
@@ -259,9 +273,10 @@
             // 
             // btn_normal
             // 
-            this.btn_normal.Location = new System.Drawing.Point(671, 172);
+            this.btn_normal.Location = new System.Drawing.Point(895, 212);
+            this.btn_normal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_normal.Name = "btn_normal";
-            this.btn_normal.Size = new System.Drawing.Size(75, 23);
+            this.btn_normal.Size = new System.Drawing.Size(100, 28);
             this.btn_normal.TabIndex = 7;
             this.btn_normal.Text = "Normal";
             this.btn_normal.UseVisualStyleBackColor = true;
@@ -269,9 +284,10 @@
             // 
             // btn_mortel
             // 
-            this.btn_mortel.Location = new System.Drawing.Point(671, 203);
+            this.btn_mortel.Location = new System.Drawing.Point(895, 250);
+            this.btn_mortel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_mortel.Name = "btn_mortel";
-            this.btn_mortel.Size = new System.Drawing.Size(75, 23);
+            this.btn_mortel.Size = new System.Drawing.Size(100, 28);
             this.btn_mortel.TabIndex = 8;
             this.btn_mortel.Text = "Mortel";
             this.btn_mortel.UseVisualStyleBackColor = true;
@@ -279,10 +295,10 @@
             // 
             // MemoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.btn_mortel);
             this.Controls.Add(this.btn_normal);
             this.Controls.Add(this.btn_facile);
@@ -291,6 +307,7 @@
             this.Controls.Add(this.btn_Retourner);
             this.Controls.Add(this.btn_Distribuer);
             this.Controls.Add(this.tlpTapisDeCartes);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MemoryForm";
             this.Text = "Memory";
             ((System.ComponentModel.ISupportInitialize)(this.pb_Recherche)).EndInit();
