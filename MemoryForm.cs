@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -227,6 +228,28 @@ namespace Memory
             }
         }
 
+        private void ShowGoodMessage()
+        {
+            Random rand = new Random();
+            int alea = rand.Next(1, 5);
+            //>= et <= sont des blindages
+            if (alea <= 1) { MessageBox.Show("Bravo !"); }
+            if (alea == 2) { MessageBox.Show("génial !"); }
+            if (alea == 3) { MessageBox.Show("Trop fort !"); }
+            if (alea >= 4) { MessageBox.Show("Eclair au chocolat");}
+        }
+
+        private void ShowBadMessage()
+        {
+            Random rand = new Random();
+            int alea = rand.Next(1, 5);
+            //>= et <= sont des blindages
+            if (alea <= 1) { MessageBox.Show("Dommage !"); }
+            if (alea == 2) { MessageBox.Show("Si nul !"); }
+            if (alea == 3) { MessageBox.Show("Vous êtes mauvais !"); }
+            if (alea >= 4) { MessageBox.Show("Tarte aux pommes"); }
+        }
+
 
         // -- EventHandler pour les boutons --
         private void btn_mortel_Click(object sender, EventArgs e)
@@ -373,34 +396,24 @@ namespace Memory
                 // Vérifie si la carte correspond à celle recherché
                 if (i_image == i_recherche)
                 {
-                    Random rand = new Random();
-                    int alea = rand.Next(1, 5);
-                    //>= et <= sont des blindages
-                    if (alea <= 1) { MessageBox.Show("Bravo !"); }
-                    if (alea == 2) { MessageBox.Show("génial !"); }
-                    if (alea == 3) { MessageBox.Show("Trop fort !"); }
-                    if (alea >= 4) { MessageBox.Show("Eclair au chocolat"); }
+                    ShowGoodMessage();
                     Reinitialiser();
                     // Retourner/Afficher toutes les cartes
                     Retourner_Visible();
                 }
                 else
                 {
-                    Random rand = new Random();
-                    int alea = rand.Next(1, 5);
-                    //>= et <= sont des blindages
-                    if (alea <= 1) { MessageBox.Show("Dommage !"); }
-                    if (alea == 2) { MessageBox.Show("Si nul !"); }
-                    if (alea == 3) { MessageBox.Show("Vous êtes mauvais !"); }
-                    if (alea >= 4) { MessageBox.Show("Tarte aux pommes"); }
+                    ShowBadMessage();
                 }
                 nb_cartes++;
             }
-            else
+
+            if (nb_cartes >= nbCartesSurTapis / 2)
             {
                 MessageBox.Show(String.Format("{0} cartes sont déjà retournées !", nbCartesSurTapis / 2));
                 // Retourner/Afficher toutes les cartes
                 Retourner_Visible();
+                Reinitialiser();
             }
         }
 
