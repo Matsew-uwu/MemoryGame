@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dllLoto;
@@ -41,7 +37,6 @@ namespace Memory
             InitializeComponent();
             // Des cartes sont distribuées et retournées au lancement de l'application
             Reinitialiser();
-            foreach (Control c in tlpTapisDeCartes.Controls) Console.WriteLine(c.Name);
         }
 
         private void Reinitialiser()
@@ -62,10 +57,6 @@ namespace Memory
         {
             Random random = new Random();
             arr = arr.OrderBy(x => random.Next()).ToArray();
-            foreach (var i in arr)
-            {
-                Console.WriteLine(i);
-            }
             return arr;
         }
 
@@ -487,4 +478,8 @@ namespace Memory
     // - Transfomer les boutons pour le choix du niveau en combobox (DropdownList)
     // - Rendre l'interface plus ergonomique (Il faut qu'on sache directement comment le jeu fonctionne)
     // - Vérifier la documentation
+
+    // BUG / Failles 
+    // - Lors de l'appuie répétitif sur le bouton "facile" .. Le delay est toujours pris en compte donc les cartes vont s'afficher successibement dans pb_recherche au bout d'un certain temps
+    // - Appuyer deux fois sur la même carte compte comme des appuies distinct (et donc deux cartes identiques)
 }
