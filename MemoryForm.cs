@@ -423,7 +423,7 @@ namespace Memory
             // Le jeu doit être lancé avant de séléctionner une carte
             if (!inGame)
             {
-                MessageBox.Show("Aucune partie n'est lancée");
+                MessageBox.Show("Aucune partie n'est lancée", "Avertissement", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -436,7 +436,7 @@ namespace Memory
                     Memory_V2_Handler(sender, e, index);
                     break;
                 default:
-                    Console.WriteLine(mode);
+                    MessageBox.Show("Une erreur est survenue lors de la séléction du mode de jeu", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
         }
@@ -481,4 +481,10 @@ namespace Memory
             Pb_XX_Click(sender, e, 7);
         }
     }
+
+    // TODO :
+    // - Gérer le fait qu'on puisse cliquer deux fois sur la même carte (c'est un glitch sinon)
+    // - Transfomer les boutons pour le choix du niveau en combobox (DropdownList)
+    // - Rendre l'interface plus ergonomique (Il faut qu'on sache directement comment le jeu fonctionne)
+    // - Vérifier la documentation
 }
