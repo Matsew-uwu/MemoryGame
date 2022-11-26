@@ -245,7 +245,7 @@ namespace Memory
             mode = 3;
         }
 
-        private void btn_normal_Click(object sender, EventArgs e)
+        private async void btn_normal_Click(object sender, EventArgs e)
         {
             // Lance le jeu
             Reinitialiser();
@@ -258,11 +258,12 @@ namespace Memory
             mode = 2;
         }
 
-        private void btn_facile_Click(object sender, EventArgs e)
+        private async void btn_facile_Click(object sender, EventArgs e)
         {
             // Lance le jeu
             Reinitialiser();
             Distribution_Aleatoire();
+            await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
             Retourner_Dos();
 
             // -- Version 1 --
@@ -473,7 +474,5 @@ namespace Memory
         {
             Pb_XX_Click(sender, e, 7);
         }
-
-        // Remarque importante : Dans le TLP les 4 derniers PictureBox ne sont plus dans le bon ordre. L'ordre est le suivant [Pb1, Pb2, Pb3, Pb4, Pb6, Pb7, Pb8]
     }
 }
