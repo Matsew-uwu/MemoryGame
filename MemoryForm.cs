@@ -261,6 +261,7 @@ namespace Memory
             // Lance le jeu
             Reinitialiser();
             Distribution_Aleatoire_Memory();
+            await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
             Retourner_Dos();
 
             // -- Version 2 --
