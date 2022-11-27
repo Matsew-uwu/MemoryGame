@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dllLoto;
@@ -29,7 +30,8 @@ namespace Memory
         Boolean cartes_retournees;      // true si la carte est retournée (de dos) ; false autrement
         Boolean inGame = false;         // Varibale indiquant si la partie est en cours
         int mode;                       // Indique le mode de jeu → 1: version 1 - 2: Memory - 3: Memory hardcore
-
+        int score_message = 0; //affiche le nb d'essais en jeu
+        string message = ""; //un petit message d'encouragement
 
 
         public MemoryForm()
@@ -221,88 +223,185 @@ namespace Memory
 
         private void ShowGoodMessage()
         {
+            score_message = score_message + 1;
+            message = "Erreur";
+            string mode_message;
+            switch (mode) //initialisation du message mode
+            {
+                case 1:
+                    mode_message = "Partie terminée : Mode Facile \n Vous avez trouvé la carte\n";
+                    break;
+                case 2:
+                    mode_message = "Partie en cours : Mode Normal \n Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    break;
+                case 3:
+                    mode_message = "Partie en cours : Mode Mortel \n Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    break;
+                default:
+                    mode_message = "Partie en cours : Mode erreur\n";
+                    break;
+            }
+            //initialisation du message
             Random rand = new Random();
             int alea = rand.Next(1, 5);
             //>= et <= sont des blindages
-            if (alea <= 1) { MessageBox.Show("Bravo !"); }
-            if (alea == 2) { MessageBox.Show("génial !"); }
-            if (alea == 3) { MessageBox.Show("Trop fort !"); }
-            if (alea >= 4) { MessageBox.Show("Eclair au chocolat");}
+            if (alea <= 1) 
+            { //mise à jour de l'affichage
+                message = "Bravo!";
+                //MessageBox.Show("Bravo !");// affiche un message sur une nouvelle fenêtre
+            }
+            if (alea == 2) { message = "Génial !"; }
+            if (alea == 3) { message = "Trop fort !"; }
+            if (alea >= 4) { message = "Eclair au chocolat !"; }
+            //mise à jour de l'affichage
+            Score.Text = mode_message +
+            "Essais : " + score_message.ToString()+"\n"+
+                message;
+            if (mode == 1) { score_message = 0; } //on réinitialise après l'affichage
         }
 
         private void ShowBadMessage()
         {
+            score_message = score_message + 1;
+            message = "Erreur";
+            string mode_message;
+            switch (mode) //initialisation du message mode
+            {
+                case 1:
+                    mode_message = "Mode Facile\n Trouvez la carte demandé, vous avez 4 essais\n ";
+                    break;
+                case 2:
+                    mode_message = "Mode Normal\n Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    break;
+                case 3:
+                    mode_message = "Mode Mortel\n Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    break;
+                default:
+                    mode_message = "Mode erreur\n";
+                    break;
+            }
             Random rand = new Random();
             int alea = rand.Next(1, 5);
             //>= et <= sont des blindages
-            if (alea <= 1) { MessageBox.Show("Dommage !"); }
-            if (alea == 2) { MessageBox.Show("Si nul !"); }
-            if (alea == 3) { MessageBox.Show("Vous êtes mauvais !"); }
-            if (alea >= 4) { MessageBox.Show("Tarte aux pommes"); }
+            if (alea <= 1) { message = "Dommage !"; }
+            if (alea == 2) { message = "Si nul !"; }
+            if (alea == 3) { message = "Vous êtes mauvais !"; }
+            if (alea >= 4) { message = "Soupe de légumes !"; }
+            //mise à jour de l'affichage
+            Score.Text = "Partie en cours : " + mode_message +
+                "Essais : " + score_message.ToString() + "\n"+
+                message;
         }
-
+        private void ShowEndMessage()
+        {
+            string mode_message;
+            switch (mode) //initialisation du message mode
+            {
+                case 1:
+                    mode_message = "Mode Facile\n";
+                    break;
+                case 2:
+                    mode_message = "Mode Normal\n";
+                    break;
+                case 3:
+                    mode_message = "Mode Mortel\n";
+                    break;
+                default:
+                    mode_message = "Mode erreur\n";
+                    break;
+            }
+            Score.Text = "Partie Terminée : " + mode_message +
+                "Cartes retournées : " + score_message.ToString()+ "\n" + message;
+            score_message = 0;
+            Reinitialiser(); //on réinitialise le jeu
+            Console.WriteLine("end");
+            Console.WriteLine(inGame);
+        }
 
         // -- EventHandler pour les boutons --
         private void btn_mortel_Click(object sender, EventArgs e)
         {
-            // Lance le jeu
-            Reinitialiser();
-            Distribution_Aleatoire_Memory();
-            Retourner_Dos();
-
-            // -- Version 3
-            // Lance la partie
-            inGame = true;
-            mode = 3;
+            Console.WriteLine("mortel");
+            Console.WriteLine(inGame);
+            if (inGame==false) {
+                // -- Version 3
+                // Lance la partie
+                inGame = true;
+                Console.WriteLine(inGame);
+                mode = 3;
+                Score.Text = "Partie en cours : Mode Mortel\n" +
+                "Retrouvez les paires de cartes";
+                // Lance le jeu
+                Distribution_Aleatoire_Memory();
+                Retourner_Dos();
+            }
+            else { MessageBox.Show("Avertissement, vous êtes actuellement dans une partie, vous devez d'abord la terminer avant de selectionner un autre mode de jeu", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            
         }
 
         private async void btn_normal_Click(object sender, EventArgs e)
         {
-            // Lance le jeu
-            Reinitialiser();
-            Distribution_Aleatoire_Memory();
-            await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
-            Retourner_Dos();
-
-            // -- Version 2 --
-            // Lance la partie
-            inGame = true;
-            mode = 2;
-        }
+            Console.WriteLine("normal");
+            Console.WriteLine(inGame);
+            if (inGame == false)
+            {
+                // -- Version 2 --
+                // Lance la partie
+                inGame = true;
+                Console.WriteLine(inGame);
+                mode = 2;
+                Score.Text = "Partie en cours : Mode Normal\n" +
+                    "Retenez bien les cartes";
+                // Lance le jeu
+                Distribution_Aleatoire_Memory();
+                await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
+                Retourner_Dos();
+                Score.Text = "Partie en cours : Mode Normal\n" +
+                    "Retrouvez les paires de cartes";
+            }
+            else { MessageBox.Show("Avertissement, vous êtes actuellement dans une partie, vous devez d'abord la terminer avant de selectionner un autre mode de jeu", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+    }
 
         private async void btn_facile_Click(object sender, EventArgs e)
         {
-            // Lance le jeu
-            Reinitialiser();
-            Distribution_Aleatoire();
-            await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
-            Retourner_Dos();
-
-            // -- Version 1 --
-            // Lance la partie
-            inGame = true;
-            mode = 1;
-
-            //Séléctionne une image aléatoire parmis celles sur le tapis
-            i_recherche = hasard.NumeroAleatoire();
-            //affiche l'image sur la zone dédiée
-            pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
+            Console.WriteLine("facile");
+            Console.WriteLine(inGame);
+            if (inGame == false)
+            {
+                // -- Version 1 --
+                // Lance la partie
+                inGame = true;
+                Console.WriteLine(inGame);
+                mode = 1;
+                Score.Text = "Partie en cours : Mode Facile \n" +
+                "Retenez les cartes, une seule carte vous sera demandé";
+                // Lance le jeu
+                Distribution_Aleatoire();
+                await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
+                Retourner_Dos();
+                Score.Text = "Partie en cours : Mode Facile\n" +
+                    "Trouvez la carte demandé, vous avez 4 essais";
+                //Séléctionne une image aléatoire parmis celles sur le tapis
+                i_recherche = hasard.NumeroAleatoire();
+                //affiche l'image sur la zone dédiée
+                pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
+            }
+            else { MessageBox.Show("Avertissement, vous êtes actuellement dans une partie, vous devez d'abord la terminer avant de selectionner un autre mode de jeu", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
+/*        private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
         {
             Reinitialiser();
             Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
-        }
+        }*/
 
 
-        private void btn_Retourner_Click(object sender, EventArgs e)
+/*        private void btn_Retourner_Click(object sender, EventArgs e)
         {
             Retourner_Dos();
-        }
+        }*/
 
-
-        private void Btn_Jouer_Click(object sender, EventArgs e)
+/*        private void Btn_Jouer_Click(object sender, EventArgs e)
         {
             // Lance le jeu
             Reinitialiser();
@@ -317,13 +416,13 @@ namespace Memory
             // -- Version 2 
             // Lance la partie
             inGame = true;
-        }
+        }*/
 
         // Bouton de test pour la loterie fournis de base
-        private void Btn_Test_Click(object sender, EventArgs e)
+/*        private void Btn_Test_Click(object sender, EventArgs e)
         {
             Distribution_Aleatoire_Memory();
-        }
+        }*/
 
 
         // -- EventHandler pour chaque PictureBox --
@@ -349,7 +448,7 @@ namespace Memory
                 // Vérifie si la carte correspond à celle recherché
                 if (Image_2 == Image_1)
                 {
-                    MessageBox.Show("Bravo !");
+                    ShowGoodMessage();
                     nb_cartes += 2;
                     Image_1 = 0;
                     Image_2 = 0;
@@ -357,7 +456,7 @@ namespace Memory
 
                 else
                 {
-                    MessageBox.Show("Dommage !");
+                    ShowBadMessage();
                     // Réinitialise et retourne les deux cartes
                     Image_1 = 0;
                     Image_2 = 0;
@@ -368,7 +467,7 @@ namespace Memory
 
             if (nb_cartes == nbCartesSurTapis)
             {
-                MessageBox.Show("Vous avez terminé la partie !");
+                ShowEndMessage();
                 // Retourner/Afficher toutes les cartes
                 ClearTapis();
                 // Réinitialisation du jeu
@@ -427,6 +526,9 @@ namespace Memory
                 case 2:
                     Memory_V2_Handler(sender, e, index);
                     break;
+                case 3:
+                    Memory_V2_Handler(sender, e, index);
+                    break;
                 default:
                     MessageBox.Show("Une erreur est survenue lors de la séléction du mode de jeu", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
@@ -471,6 +573,16 @@ namespace Memory
         private void pb_08_Click(object sender, EventArgs e)
         {
             Pb_XX_Click(sender, e, 7);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Score_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 
