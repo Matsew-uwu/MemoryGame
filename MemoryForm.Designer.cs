@@ -248,7 +248,7 @@
             this.btn_mortel.TabIndex = 8;
             this.btn_mortel.Text = "Mortel";
             this.btn_mortel.UseVisualStyleBackColor = true;
-            this.btn_mortel.Click += new System.EventHandler(this.btn_mortel_Click);
+            this.btn_mortel.Click += new System.EventHandler(this.Btn_mortel_Click);
             // 
             // label1
             // 
@@ -262,7 +262,6 @@
             this.label1.Size = new System.Drawing.Size(237, 24);
             this.label1.TabIndex = 9;
             this.label1.Text = "Selection du mode de jeu :";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // Titre
             // 
@@ -285,7 +284,6 @@
             this.Score.Size = new System.Drawing.Size(584, 143);
             this.Score.TabIndex = 11;
             this.Score.Text = "Aucune partie en cours : selectionnez un mode pour jouer";
-            this.Score.Click += new System.EventHandler(this.Score_Click);
             // 
             // MemoryForm
             // 

@@ -29,10 +29,17 @@ namespace Memory
         int nb_cartes = 0;              // Nb de carte retourné
 
         Boolean cartes_retournees;      // true si la carte est retournée (de dos) ; false autrement
-        Boolean inGame = false;         // Varibale indiquant si la partie est en cours
+        Status GameStatus;                 // Varibale indiquant si la partie est en cours
         int mode;                       // Indique le mode de jeu → 1: version 1 - 2: Memory - 3: Memory hardcore
-        int score_message = 0; //affiche le nb d'essais en jeu
-        string message = ""; //un petit message d'encouragement
+        int score_message;              // Affiche le nb d'essais en jeu (nombre de cartes retournées)
+        string message;                 // Un petit message d'encouragement !
+
+        public enum Status
+        {
+            NotInGame,
+            InGame,
+            Pending
+        }
 
 
         public MemoryForm()
@@ -42,6 +49,7 @@ namespace Memory
             Reinitialiser();
         }
 
+
         private void Reinitialiser()
         {
             // Réinitialisation des valeurs
@@ -50,11 +58,13 @@ namespace Memory
             Image_2 = 0;
             pb_Recherche.Image = null;
             i_recherche = 0;
-            inGame = false;
+            GameStatus = Status.NotInGame;
             score_message = 0;
             PbImage1 = null;
             PbImage2 = null;
+            message = "";
         }
+
 
         public int[] shuffle(int[] arr)
         /* Fonction qui permet de mélanger les éléments d'une liste */
@@ -64,6 +74,7 @@ namespace Memory
             return arr;
         }
 
+
         private void Distribution_Sequentielle() // Distribution basique
         {
             PictureBox carte;
@@ -71,13 +82,14 @@ namespace Memory
             foreach (Control ctrl in tlpTapisDeCartes.Controls)
             {
                 // Caste le contrôle en PictureBox...
-                carte = (PictureBox)ctrl;
+                carte = (PictureBox) ctrl;
                 // Accès à la propriété Image
                 carte.Image = ilSabotDeCartes.Images[i_carte];
                 // Incrémentation de l'indice de l'image
                 i_carte++;
             }
         }
+
 
         private void Distribution_Aleatoire() // Distribution aléatoire
         {
@@ -95,7 +107,7 @@ namespace Memory
             // On récupère une série de <nbCartesSurTapis> cartes parmi celles du Loto
             // → La série d'entiers retournée par la LotoMachine correspond aux indices des cartes dans le "sabot"
             List<int> cartes = new List<int>(hasard.TirageAleatoire(nbCartesSurTapis, false));
-            cartes.RemoveAt(0);
+            cartes.RemoveAt(0); // Permet de supprimer la cartes première carte présente par défaut
 
             tImagesCartes = new int[(nbCartesSurTapis)];
             cartes.CopyTo(tImagesCartes, 0);
@@ -121,6 +133,7 @@ namespace Memory
             }
         }
 
+
         private void Distribution_Aleatoire_Memory() // Distribution aléatoire
         {
             /* Fonctionne de manière similaire à la distribution aléatoire classique, sauf que chaque carte est en doublon */
@@ -140,7 +153,7 @@ namespace Memory
             // On récupère une série de <nbCartesSurTapis> cartes parmi celles du Loto
             // → La série d'entiers retournée par la LotoMachine correspond aux indices des cartes dans le "sabot"
             List<int> cartes = new List<int>(hasard.TirageAleatoire(nbCartesSurTapis / 2, false));
-            cartes.RemoveAt(0);
+            cartes.RemoveAt(0); // Permet de supprimer la cartes première carte présente par défaut
 
             tImagesCartes = new int[(nbCartesSurTapis)];
             cartes.CopyTo(tImagesCartes, 0);
@@ -167,6 +180,7 @@ namespace Memory
             }
         }
 
+
         private void Retourner_Visible()
         {
             PictureBox carte;
@@ -186,6 +200,7 @@ namespace Memory
             cartes_retournees = false;
         }
 
+
         private void Retourner_Dos()
         {
             PictureBox carte;
@@ -198,6 +213,7 @@ namespace Memory
             cartes_retournees = true; // Indique que la carte est retournée
         }
 
+
         private void ClearTapis()
         {
             PictureBox carte;
@@ -209,6 +225,7 @@ namespace Memory
 
             cartes_retournees = true; // Indique que la carte est retournée
         }
+
 
         private void RetournerCartes()
         {
@@ -223,12 +240,15 @@ namespace Memory
             }
         }
 
+
         private void ShowGoodMessage()
         {
-            score_message = score_message + 1;
             message = "Erreur";
+
             string mode_message;
-            switch (mode) //initialisation du message mode
+
+            // Initialisation du message pour le mode de jeu
+            switch (mode) 
             {
                 case 1:
                     mode_message = "Partie terminée : Mode Facile \n Vous avez trouvé la carte\n";
@@ -243,31 +263,33 @@ namespace Memory
                     mode_message = "Partie en cours : Mode erreur\n";
                     break;
             }
-            //initialisation du message
+
+            // Génération du message
             Random rand = new Random();
             int alea = rand.Next(1, 5);
-            //>= et <= sont des blindages
-            if (alea <= 1) 
-            { //mise à jour de l'affichage
-                message = "Bravo!";
-                //MessageBox.Show("Bravo !");// affiche un message sur une nouvelle fenêtre
-            }
+
+            // >= et <= sont des blindages
+            if (alea <= 1) { message = "Bravo!"; } 
             if (alea == 2) { message = "Génial !"; }
             if (alea == 3) { message = "Trop fort !"; }
             if (alea >= 4) { message = "Eclair au chocolat !"; }
-            //mise à jour de l'affichage
+            
+            // Mise à jour de l'affichage
             Score.Text = mode_message +
             "Essais : " + score_message.ToString()+"\n"+
                 message;
-            if (mode == 1) { score_message = 0; } //on réinitialise après l'affichage
+
         }
+
 
         private void ShowBadMessage()
         {
-            score_message = score_message + 1;
             message = "Erreur";
+
             string mode_message;
-            switch (mode) //initialisation du message mode
+
+            // Initialisation du message pour le mode de jeu
+            switch (mode) 
             {
                 case 1:
                     mode_message = "Mode Facile\n Trouvez la carte demandé, vous avez 4 essais\n ";
@@ -282,22 +304,31 @@ namespace Memory
                     mode_message = "Mode erreur\n";
                     break;
             }
+            
             Random rand = new Random();
             int alea = rand.Next(1, 5);
+
             //>= et <= sont des blindages
             if (alea <= 1) { message = "Dommage !"; }
             if (alea == 2) { message = "Si nul !"; }
             if (alea == 3) { message = "Vous êtes mauvais !"; }
             if (alea >= 4) { message = "Soupe de légumes !"; }
-            //mise à jour de l'affichage
+
+            // Mise à jour de l'affichage
+
             Score.Text = "Partie en cours : " + mode_message +
-                "Essais : " + score_message.ToString() + "\n"+
+                "Essais : " + 
+                score_message.ToString() + "\n" +
                 message;
         }
+
+
         private void ShowEndMessage()
         {
             string mode_message;
-            switch (mode) //initialisation du message mode
+
+            // Initialisation du message pour le mode de jeu
+            switch (mode) 
             {
                 case 1:
                     mode_message = "Mode Facile\n";
@@ -312,40 +343,41 @@ namespace Memory
                     mode_message = "Mode erreur\n";
                     break;
             }
+
+
             Score.Text = "Partie Terminée : " + mode_message +
                 "Essais : " + score_message.ToString()+ "\n" + message;
             score_message = 0;
-            Reinitialiser(); //on réinitialise le jeu
         }
 
+
         // -- EventHandler pour les boutons --
-        private void btn_mortel_Click(object sender, EventArgs e)
+        private void Btn_mortel_Click(object sender, EventArgs e)
         {
-            if (inGame==false) {
-                // -- Version 3
+            if (GameStatus == Status.NotInGame) {
+                // -- Version 3 --
+                Reinitialiser();
+
                 // Lance la partie
-                score_message = 0;
-                inGame = true;
-                Console.WriteLine(inGame);
+                GameStatus = Status.InGame;
                 mode = 3;
+
                 Score.Text = "Partie en cours : Mode Mortel\n" +
                 "Retrouvez les paires de cartes";
+
                 // Lance le jeu
                 Distribution_Aleatoire_Memory();
                 Retourner_Dos();
             }
             else {
                 DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
+                
                 if (dialogResult == DialogResult.Yes)
                 {
-                    inGame = false;
+                    GameStatus = Status.NotInGame;
                     Reinitialiser();
                     Score.Text = "Partie Terminée : Vous avez abandonné !\n"
-                        +"Pour jouer selectionner d'abord un mode de jeu";
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    Console.Write("fermer la fenêtre");
+                        + "Pour jouer selectionner d'abord un mode de jeu";
                 }
             }
             
@@ -353,20 +385,23 @@ namespace Memory
 
         private async void btn_normal_Click(object sender, EventArgs e)
         {
-            if (inGame == false)
+            if (GameStatus == Status.NotInGame)
             {
                 // -- Version 2 --
+                Reinitialiser();
+
                 // Lance la partie
-                score_message = 0;
-                inGame = true;
-                Console.WriteLine(inGame);
+                GameStatus = Status.InGame;
                 mode = 2;
+
                 Score.Text = "Partie en cours : Mode Normal\n" +
                     "Retenez bien les cartes";
+
                 // Lance le jeu
                 Distribution_Aleatoire_Memory();
                 await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
                 Retourner_Dos();
+
                 Score.Text = "Partie en cours : Mode Normal\n" +
                     "Retrouvez les paires de cartes";
             }
@@ -375,36 +410,36 @@ namespace Memory
                 DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    inGame = false;
+                    GameStatus = Status.NotInGame;
                     Reinitialiser();
                     Score.Text = "Partie Terminée : Vous avez abandonné !\n" 
                         + "Pour jouer selectionner d'abord un mode de jeu";
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    Console.Write("fermer la fenêtre");
                 }
             }
         }
 
         private async void btn_facile_Click(object sender, EventArgs e)
         {
-            if (inGame == false)
+            if (GameStatus == Status.NotInGame)
             {
                 // -- Version 1 --
+                Reinitialiser();
+
                 // Lance la partie
-                score_message = 0;
-                inGame = true;
-                Console.WriteLine(inGame);
+                GameStatus = Status.InGame;
                 mode = 1;
+
                 Score.Text = "Partie en cours : Mode Facile \n" +
-                "Retenez les cartes, une seule carte vous sera demandé";
+                    "Retenez les cartes, une seule carte vous sera demandé";
+
                 // Lance le jeu
                 Distribution_Aleatoire();
                 await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
                 Retourner_Dos();
+
                 Score.Text = "Partie en cours : Mode Facile\n" +
                     "Trouvez la carte demandé, vous avez 4 essais";
+
                 //Séléctionne une image aléatoire parmis celles sur le tapis
                 i_recherche = hasard.NumeroAleatoire();
                 //affiche l'image sur la zone dédiée
@@ -412,107 +447,25 @@ namespace Memory
             }
             else
             {
-               
                 DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    inGame = false;
+                    GameStatus = Status.NotInGame;
                     Reinitialiser();
                     Score.Text = "Partie terminée : vous avez Abandoné !\n" 
                         + "Pour jouer selectionner d'abord un mode de jeu";
                 }
-                else if (dialogResult == DialogResult.No)
-                {
-                    Console.Write("fermer la fenêtre");
-                }
             }
         }
 
-                /*        private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
-                        {
-                            Reinitialiser();
-                            Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
-                        }*/
-
-
-                /*        private void btn_Retourner_Click(object sender, EventArgs e)
-                        {
-                            Retourner_Dos();
-                        }*/
-
-                /*        private void Btn_Jouer_Click(object sender, EventArgs e)
-                        {
-                            // Lance le jeu
-                            Reinitialiser();
-                            Distribution_Aleatoire_Memory();
-                            Retourner_Dos();
-
-                            // -- Version 1
-                            // Séléctionne une image aléatoire parmis celles sur le tapis
-                            i_recherche = hasard.NumeroAleatoire();
-                            pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
-
-                            // -- Version 2 
-                            // Lance la partie
-                            inGame = true;
-                        }*/
-
-                // Bouton de test pour la loterie fournis de base
-                /*        private void Btn_Test_Click(object sender, EventArgs e)
-                        {
-                            Distribution_Aleatoire_Memory();
-                        }*/
-
-
-                // -- EventHandler pour chaque PictureBox --
-
-        private void Memory_V2_Handler(object sender, EventArgs e, int index)
+        private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
         {
-            /* Gestion de la version 1 du jeu */
-
-            if (Image_1 == 0)
-            {
-                Image_1 = tImagesCartes[index];                 // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
-                PbImage1 = (PictureBox)sender;                     // Récupère la carte
-                PbImage1.Image = ilSabotDeCartes.Images[Image_1];   // Afficher la carte (retourner la carte)
-            }
-
-            // Le nombre de carte retourné doit être inférieur à la moitié du nombre de cartes sur le tapis.
-            else
-            {
-                Image_2 = tImagesCartes[index];                 // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
-                PbImage2 = (PictureBox)sender;                      // Récupère la carte
-                PbImage2.Image = ilSabotDeCartes.Images[Image_2];   // Afficher la carte (retourner la carte)
-
-                // Vérifie si la carte correspond à celle recherché
-                if (Image_2 == Image_1)
-                {
-                    ShowGoodMessage();
-                    nb_cartes += 2;
-                    Image_1 = 0;
-                    Image_2 = 0;
-                }
-
-                else
-                {
-                    ShowBadMessage();
-                    // Réinitialise et retourne les deux cartes
-                    Image_1 = 0;
-                    Image_2 = 0;
-                    PbImage1.Image = ilSabotDeCartes.Images[0];
-                    PbImage2.Image = ilSabotDeCartes.Images[0];
-                }
-            }
-
-            if (nb_cartes == nbCartesSurTapis)
-            {
-                ShowEndMessage();
-                // Retourner/Afficher toutes les cartes
-                ClearTapis();
-                // Réinitialisation du jeu
-                Reinitialiser();
-            }
+            Reinitialiser();
+            Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
         }
+
+
+        // -- EventHandler pour chaque PictureBox --
 
         private void Memory_V1_Handler(object sender, EventArgs e, int index)
         {
@@ -520,13 +473,14 @@ namespace Memory
             if (nb_cartes < nbCartesSurTapis / 2)
             {
                 PictureBox carte = (PictureBox)sender;                  // Récupère la carte
-                int i_image = tImagesCartes[index];                 // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
+                int i_image = tImagesCartes[index];                     // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
                 carte.Image = ilSabotDeCartes.Images[i_image];          // Afficher la carte (retourner la carte)
 
                 // Vérifie si la carte correspond à celle recherché
                 if (i_image == i_recherche)
                 {
                     ShowGoodMessage();
+                    // La partie prend fin
                     Reinitialiser();
                     // Retourner/Afficher toutes les cartes
                     Retourner_Visible();
@@ -548,10 +502,65 @@ namespace Memory
         }
 
 
+        private void Memory_V2_Handler(object sender, EventArgs e, int index)
+        {
+            /* Gestion de la version Memory */
+
+            if (Image_1 == 0)
+            {
+                Image_1 = tImagesCartes[index];                     // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
+                PbImage1 = (PictureBox)sender;                      // Récupère la carte
+                PbImage1.Image = ilSabotDeCartes.Images[Image_1];   // Afficher la carte (retourner la carte)
+            }
+            else
+            {
+                Image_2 = tImagesCartes[index];                     // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
+                PbImage2 = (PictureBox)sender;                      // Récupère la carte
+                PbImage2.Image = ilSabotDeCartes.Images[Image_2];   // Afficher la carte (retourner la carte)
+
+                // Vérifie si la carte correspond à celle recherchée
+                if (Image_2 == Image_1)
+                {
+                    score_message = score_message + 1;
+
+                    ShowGoodMessage();
+
+                    nb_cartes += 2;
+                    Image_1 = 0;
+                    Image_2 = 0;
+                }
+
+                else
+                {
+                    score_message = score_message + 1;
+
+                    ShowBadMessage();
+
+                    // Réinitialise et retourne les deux cartes
+                    Image_1 = 0;
+                    Image_2 = 0;
+                    PbImage1.Image = ilSabotDeCartes.Images[0];
+                    PbImage2.Image = ilSabotDeCartes.Images[0];
+
+                }
+            }
+
+            // La partie prend fin lorsque toutes les cartes sont retournées
+            if (nb_cartes == nbCartesSurTapis)
+            {
+                ShowEndMessage();
+                // Retourner/Afficher toutes les cartes
+                ClearTapis();
+                // Réinitialisation du jeu
+                Reinitialiser();
+            }
+        }
+
+
         private void Pb_XX_Click(object sender, EventArgs e, int index) //permet de connaître la carte choisie
         {
             // Le jeu doit être lancé avant de séléctionner une carte
-            if (!inGame)
+            if (!(GameStatus == Status.InGame))
             {
                 MessageBox.Show("Aucune partie n'est lancée", "Avertissement", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -614,24 +623,35 @@ namespace Memory
             Pb_XX_Click(sender, e, 7);
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+        /* ------------------------------ */
 
+        // Méthodes de debug
+        /*private void btn_Retourner_Click(object sender, EventArgs e)
+        {
+            Retourner_Dos();
         }
 
-        private void Score_Click(object sender, EventArgs e)
+        private void Btn_Jouer_Click(object sender, EventArgs e)
         {
-            
+            // Lance le jeu
+            Reinitialiser();
+            Distribution_Aleatoire_Memory();
+            Retourner_Dos();
+
+            // -- Version 1
+            // Séléctionne une image aléatoire parmis celles sur le tapis
+            i_recherche = hasard.NumeroAleatoire();
+            pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
+
+            // -- Version 2 
+            // Lance la partie
+            inGame = true;
         }
+
+        // Bouton de test pour la loterie fournis de base
+        private void Btn_Test_Click(object sender, EventArgs e)
+        {
+            Distribution_Aleatoire_Memory();
+        }*/
     }
-
-    // TODO :
-    // - Gérer le fait qu'on puisse cliquer deux fois sur la même carte (c'est un glitch sinon)
-    // - Transfomer les boutons pour le choix du niveau en combobox (DropdownList)
-    // - Rendre l'interface plus ergonomique (Il faut qu'on sache directement comment le jeu fonctionne)
-    // - Vérifier la documentation
-
-    // BUG / Failles 
-    // - Lors de l'appuie répétitif sur le bouton "facile" .. Le delay est toujours pris en compte donc les cartes vont s'afficher successibement dans pb_recherche au bout d'un certain temps
-    // - Appuyer deux fois sur la même carte compte comme des appuies distinct (et donc deux cartes identiques)
 }
