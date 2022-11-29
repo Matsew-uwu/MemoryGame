@@ -26,6 +26,7 @@ namespace Memory
         int Image_2;
         PictureBox PbImage1;            // Les PictureBox des cartes retournées
         PictureBox PbImage2;
+        int CurrentIndexImage;          // L'indice de la carte retournée dans le tapis
         int nb_cartes = 0;              // Nb de carte retourné
 
         Boolean cartes_retournees;      // true si la carte est retournée (de dos) ; false autrement
@@ -56,6 +57,7 @@ namespace Memory
             nb_cartes = 0;
             Image_1 = 0;
             Image_2 = 0;
+            CurrentIndexImage = -1;
             pb_Recherche.Image = null;
             i_recherche = 0;
             GameStatus = Status.NotInGame;
@@ -73,7 +75,6 @@ namespace Memory
             arr = arr.OrderBy(x => random.Next()).ToArray();
             return arr;
         }
-
 
         private void Distribution_Sequentielle() // Distribution basique
         {
@@ -391,7 +392,7 @@ namespace Memory
                 Reinitialiser();
 
                 // Lance la partie
-                GameStatus = Status.InGame;
+                GameStatus = Status.Pending;    // Le jeu est mis en attente
                 mode = 2;
 
                 Score.Text = "Partie en cours : Mode Normal\n" +
@@ -399,8 +400,12 @@ namespace Memory
 
                 // Lance le jeu
                 Distribution_Aleatoire_Memory();
-                await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
+                
+                await Task.Delay(3000);         // Délai d'attente avant de retourner les cartes
+                
                 Retourner_Dos();
+                GameStatus = Status.InGame;    // La partie débute
+
 
                 Score.Text = "Partie en cours : Mode Normal\n" +
                     "Retrouvez les paires de cartes";
@@ -410,7 +415,7 @@ namespace Memory
                 DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    GameStatus = Status.NotInGame;
+                    GameStatus = Status.InGame;
                     Reinitialiser();
                     Score.Text = "Partie Terminée : Vous avez abandonné !\n" 
                         + "Pour jouer selectionner d'abord un mode de jeu";
@@ -426,7 +431,7 @@ namespace Memory
                 Reinitialiser();
 
                 // Lance la partie
-                GameStatus = Status.InGame;
+                GameStatus = Status.Pending;    // Le jeu est mis en attente
                 mode = 1;
 
                 Score.Text = "Partie en cours : Mode Facile \n" +
@@ -434,7 +439,10 @@ namespace Memory
 
                 // Lance le jeu
                 Distribution_Aleatoire();
-                await Task.Delay(3000); // Délai d'attente avant de retourner les cartes
+
+                await Task.Delay(3000);         // Délai d'attente avant de retourner les cartes
+
+                GameStatus = Status.InGame;     // La partie débute
                 Retourner_Dos();
 
                 Score.Text = "Partie en cours : Mode Facile\n" +
@@ -467,7 +475,7 @@ namespace Memory
 
         // -- EventHandler pour chaque PictureBox --
 
-        private void Memory_V1_Handler(object sender, EventArgs e, int index)
+        private async void Memory_V1_Handler(object sender, EventArgs e, int index)
         {
             // Le nombre de carte retourné doit être inférieur à la moitié du nombre de cartes sur le tapis.
             if (nb_cartes < nbCartesSurTapis / 2)
@@ -475,12 +483,19 @@ namespace Memory
                 PictureBox carte = (PictureBox)sender;                  // Récupère la carte
                 int i_image = tImagesCartes[index];                     // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
                 carte.Image = ilSabotDeCartes.Images[i_image];          // Afficher la carte (retourner la carte)
+                CurrentIndexImage = index;
 
                 // Vérifie si la carte correspond à celle recherché
                 if (i_image == i_recherche)
                 {
                     ShowGoodMessage();
                     // La partie prend fin
+
+                    // La partie est mise en attente le temps de l'animation
+                    GameStatus = Status.Pending;
+                    await Task.Delay(1000);
+                    GameStatus = Status.InGame;
+
                     Reinitialiser();
                     // Retourner/Afficher toutes les cartes
                     Retourner_Visible();
@@ -492,7 +507,7 @@ namespace Memory
                 nb_cartes++;
             }
 
-            if (score_message >= nbCartesSurTapis / 2)
+            if (nb_cartes >= nbCartesSurTapis / 2)
             {
                 MessageBox.Show(String.Format("{0} essais ont étés effectués !", nbCartesSurTapis / 2));
                 // Retourner/Afficher toutes les cartes
@@ -511,6 +526,7 @@ namespace Memory
                 Image_1 = tImagesCartes[index];                     // Récupère l'indice de l'image dans la loterie, correspondant à la carte retournée 
                 PbImage1 = (PictureBox)sender;                      // Récupère la carte
                 PbImage1.Image = ilSabotDeCartes.Images[Image_1];   // Afficher la carte (retourner la carte)
+                CurrentIndexImage = index;
             }
             else
             {
@@ -540,7 +556,11 @@ namespace Memory
                     Image_1 = 0;
                     Image_2 = 0;
 
+                    // La partie est mise en attente le temps de l'animation
+                    GameStatus = Status.Pending;
                     await Task.Delay(1000);
+                    GameStatus = Status.InGame;
+
 
                     PbImage1.Image = ilSabotDeCartes.Images[0];
                     PbImage2.Image = ilSabotDeCartes.Images[0];
@@ -563,10 +583,19 @@ namespace Memory
         private void Pb_XX_Click(object sender, EventArgs e, int index) //permet de connaître la carte choisie
         {
             // Le jeu doit être lancé avant de séléctionner une carte
-            if (!(GameStatus == Status.InGame))
+            if (GameStatus == Status.NotInGame)
             {
                 MessageBox.Show("Aucune partie n'est lancée", "Avertissement", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
+            else if (GameStatus == Status.Pending)
+            {
+                return; // Aucune action n'est effectué lorsque le jeu est en suspens
+            }
+
+            if (index == CurrentIndexImage)
+            {
+                return; // Aucune action n'est effectué lorsque une même carte est séléctionné
             }
 
             switch (mode)
