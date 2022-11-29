@@ -324,12 +324,12 @@ namespace Memory
 
             if (hideScore)
             {
-                Score.Text = "Partie Terminée : " + mode_message +
+                Score.Text = "Partie en cours : " + mode_message +
                     "\n" + message;
             }
             else
             {
-                Score.Text = "Partie Terminée : " + mode_message +
+                Score.Text = "Partie en cours : " + mode_message +
                 "Essais : " + nb_cartes.ToString() + "\n" + message;
             }
         }
@@ -381,8 +381,8 @@ namespace Memory
                 GameStatus = Status.Pending;    // Le jeu est mis en attente
                 mode = 1;
 
-                Score.Text = "Partie en cours : Mode Facile \n" +
-                    "Retenez les cartes, une seule carte vous sera demandée";
+                Score.Text = "Partie en cours : Mode Facile " + "\n\n" +
+                    "→ Retenez les cartes, une seule carte vous sera demandée";
 
                 // Lance le jeu
                 Distribution_Aleatoire();

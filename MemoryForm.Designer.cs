@@ -109,7 +109,7 @@
             // pb_Recherche
             // 
             this.pb_Recherche.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.pb_Recherche.Location = new System.Drawing.Point(831, 325);
+            this.pb_Recherche.Location = new System.Drawing.Point(825, 140);
             this.pb_Recherche.Margin = new System.Windows.Forms.Padding(4);
             this.pb_Recherche.Name = "pb_Recherche";
             this.pb_Recherche.Size = new System.Drawing.Size(133, 123);
@@ -231,7 +231,7 @@
             // btn_facile
             // 
             this.btn_facile.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_facile.Location = new System.Drawing.Point(847, 132);
+            this.btn_facile.Location = new System.Drawing.Point(847, 421);
             this.btn_facile.Margin = new System.Windows.Forms.Padding(4);
             this.btn_facile.Name = "btn_facile";
             this.btn_facile.Size = new System.Drawing.Size(100, 28);
@@ -243,7 +243,7 @@
             // btn_normal
             // 
             this.btn_normal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_normal.Location = new System.Drawing.Point(847, 184);
+            this.btn_normal.Location = new System.Drawing.Point(847, 473);
             this.btn_normal.Margin = new System.Windows.Forms.Padding(4);
             this.btn_normal.Name = "btn_normal";
             this.btn_normal.Size = new System.Drawing.Size(100, 28);
@@ -255,7 +255,7 @@
             // btn_mortel
             // 
             this.btn_mortel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_mortel.Location = new System.Drawing.Point(847, 238);
+            this.btn_mortel.Location = new System.Drawing.Point(847, 527);
             this.btn_mortel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_mortel.Name = "btn_mortel";
             this.btn_mortel.Size = new System.Drawing.Size(100, 28);
@@ -271,7 +271,7 @@
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label1.Location = new System.Drawing.Point(826, 78);
+            this.label1.Location = new System.Drawing.Point(826, 367);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(148, 29);
@@ -308,7 +308,7 @@
             this.Lb_GameMode.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.Lb_GameMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lb_GameMode.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Lb_GameMode.Location = new System.Drawing.Point(826, 78);
+            this.Lb_GameMode.Location = new System.Drawing.Point(826, 367);
             this.Lb_GameMode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lb_GameMode.Name = "Lb_GameMode";
             this.Lb_GameMode.Size = new System.Drawing.Size(148, 29);
@@ -320,7 +320,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(1067, 594);
             this.Controls.Add(this.Score);
             this.Controls.Add(this.Titre);
             this.Controls.Add(this.Lb_GameMode);
