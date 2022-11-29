@@ -351,78 +351,7 @@ namespace Memory
             score_message = 0;
         }
 
-
         // -- EventHandler pour les boutons --
-        private void Btn_mortel_Click(object sender, EventArgs e)
-        {
-            if (GameStatus == Status.NotInGame) {
-                // -- Version 3 --
-                Reinitialiser();
-
-                // Lance la partie
-                GameStatus = Status.InGame;
-                mode = 3;
-
-                Score.Text = "Partie en cours : Mode Mortel\n" +
-                "Retrouvez les paires de cartes";
-
-                // Lance le jeu
-                Distribution_Aleatoire_Memory();
-                Retourner_Dos();
-            }
-            else {
-                DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
-                
-                if (dialogResult == DialogResult.Yes)
-                {
-                    GameStatus = Status.NotInGame;
-                    Reinitialiser();
-                    Score.Text = "Partie Terminée : Vous avez abandonné !\n"
-                        + "Pour jouer selectionner d'abord un mode de jeu";
-                }
-            }
-            
-        }
-
-        private async void btn_normal_Click(object sender, EventArgs e)
-        {
-            if (GameStatus == Status.NotInGame)
-            {
-                // -- Version 2 --
-                Reinitialiser();
-
-                // Lance la partie
-                GameStatus = Status.Pending;    // Le jeu est mis en attente
-                mode = 2;
-
-                Score.Text = "Partie en cours : Mode Normal\n" +
-                    "Retenez bien les cartes";
-
-                // Lance le jeu
-                Distribution_Aleatoire_Memory();
-                
-                await Task.Delay(3000);         // Délai d'attente avant de retourner les cartes
-                
-                Retourner_Dos();
-                GameStatus = Status.InGame;    // La partie débute
-
-
-                Score.Text = "Partie en cours : Mode Normal\n" +
-                    "Retrouvez les paires de cartes";
-            }
-            else
-            { 
-                DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    GameStatus = Status.InGame;
-                    Reinitialiser();
-                    Score.Text = "Partie Terminée : Vous avez abandonné !\n" 
-                        + "Pour jouer selectionner d'abord un mode de jeu";
-                }
-            }
-        }
-
         private async void btn_facile_Click(object sender, EventArgs e)
         {
             if (GameStatus == Status.NotInGame)
@@ -460,11 +389,93 @@ namespace Memory
                 {
                     GameStatus = Status.NotInGame;
                     Reinitialiser();
-                    Score.Text = "Partie terminée : vous avez Abandoné !\n" 
+                    Score.Text = "Partie terminée : vous avez Abandoné !\n"
                         + "Pour jouer selectionner d'abord un mode de jeu";
+
+                    // Lance la partie concernée
+                    btn_facile_Click(sender, e);
                 }
             }
         }
+
+
+        private async void btn_normal_Click(object sender, EventArgs e)
+        {
+            if (GameStatus == Status.NotInGame)
+            {
+                // -- Version 2 --
+                Reinitialiser();
+
+                // Lance la partie
+                GameStatus = Status.Pending;    // Le jeu est mis en attente
+                mode = 2;
+
+                Score.Text = "Partie en cours : Mode Normal\n" +
+                    "Retenez bien les cartes";
+
+                // Lance le jeu
+                Distribution_Aleatoire_Memory();
+
+                await Task.Delay(3000);         // Délai d'attente avant de retourner les cartes
+
+                Retourner_Dos();
+                GameStatus = Status.InGame;    // La partie débute
+
+
+                Score.Text = "Partie en cours : Mode Normal\n" +
+                    "Retrouvez les paires de cartes";
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    GameStatus = Status.InGame;
+                    Reinitialiser();
+                    Score.Text = "Partie Terminée : Vous avez abandonné !\n"
+                        + "Pour jouer selectionner d'abord un mode de jeu";
+
+                    // Lance la partie concernée
+                    btn_normal_Click(sender, e);
+                }
+            }
+        }
+
+
+        private void Btn_mortel_Click(object sender, EventArgs e)
+        {
+            if (GameStatus == Status.NotInGame) {
+                // -- Version 3 --
+                Reinitialiser();
+
+                // Lance la partie
+                GameStatus = Status.InGame;
+                mode = 3;
+
+                Score.Text = "Partie en cours : Mode Mortel\n" +
+                "Retrouvez les paires de cartes";
+
+                // Lance le jeu
+                Distribution_Aleatoire_Memory();
+                Retourner_Dos();
+            }
+            else {
+                DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
+                
+                if (dialogResult == DialogResult.Yes)
+                {
+                    GameStatus = Status.NotInGame;
+                    Reinitialiser();
+                    Score.Text = "Partie Terminée : Vous avez abandonné !\n"
+                        + "Pour jouer selectionner d'abord un mode de jeu";
+
+                    // Lance la partie concernée
+                    Btn_mortel_Click(sender, e);
+                }
+            }
+            
+        }
+
 
         private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
         {
