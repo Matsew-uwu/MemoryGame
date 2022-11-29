@@ -250,13 +250,13 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Mode Recherche \n\n→ Vous avez trouvé la carte\n";
+                    mode_message = "Recherche \n\n→ Vous avez trouvé la carte\n\nVous pouvez relancer une partie\n";
                     break;
                 case 2:
-                    mode_message = "Mode Normal \n\n→ Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Memory \n\n→ Trouvez les paires de cartes\n";
                     break;
                 case 3:
-                    mode_message = "Mode Mortel \n\n→ Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Mortel \n\n→ Trouvez les paires de cartes\n";
                     break;
                 default:
                     mode_message = "Mode erreur\n";
@@ -277,11 +277,11 @@ namespace Memory
             if (hideScore)
             {
                 Score.Text = "Partie en cours : " + mode_message +
-                    "\n" + message;
+                    "\n\n" + message;
             }
             else
             {
-                Score.Text = "Partie en cours : " + mode_message +
+                Score.Text = "Partie en cours : " + mode_message + "\n" +
                 "Essais : " + nb_cartes.ToString() + "\n" + message;
             }
 
@@ -298,13 +298,13 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Mode Recherche\n\n→ Trouvez la carte demandée\n ";
+                    mode_message = "Recherche\n\n→ Trouvez la carte demandée\n ";
                     break;
                 case 2:
-                    mode_message = "Mode Normal\n\n →Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Memory\n\n →Trouvez les paires de cartes\n";
                     break;
                 case 3:
-                    mode_message = "Mode Mortel\n\n →Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Mortel\n\n →Trouvez les paires de cartes\n";
                     break;
                 default:
                     mode_message = "Mode erreur\n";
@@ -329,8 +329,8 @@ namespace Memory
             }
             else
             {
-                Score.Text = "Partie en cours : " + mode_message +
-                "Essais : " + nb_cartes.ToString() + "\n" + message;
+                Score.Text = "Partie en cours : " + mode_message + "\n" +
+                "Essais : " + nb_cartes.ToString() + "\n\n" + message;
             }
         }
 
@@ -343,13 +343,13 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Mode Recherche\n";
+                    mode_message = "Recherche\n";
                     break;
                 case 2:
-                    mode_message = "Mode Normal\n";
+                    mode_message = "Memory\n";
                     break;
                 case 3:
-                    mode_message = "Mode Mortel\n";
+                    mode_message = "Mortel\n";
                     break;
                 default:
                     mode_message = "Mode erreur\n";
@@ -360,12 +360,12 @@ namespace Memory
             if (hideScore)
             {
                 Score.Text = "Partie Terminée : " + mode_message +
-                    "\n" + message;
+                    "\n" + "Veillez lancer une nouvelle partie";
             }
             else
             {
                 Score.Text = "Partie Terminée : " + mode_message +
-                "Essais : " + nb_cartes.ToString() + "\n" + message;
+                "Essais : " + nb_cartes.ToString() + "\n\n" + message;
             }
         }
 
@@ -381,7 +381,7 @@ namespace Memory
                 GameStatus = Status.Pending;    // Le jeu est mis en attente
                 mode = 1;
 
-                Score.Text = "Partie en cours : Mode Recherche " + "\n\n" +
+                Score.Text = "Partie en cours : Recherche " + "\n\n" +
                     "→ Retenez les cartes, une seule carte vous sera demandée";
 
                 // Lance le jeu
@@ -392,7 +392,7 @@ namespace Memory
                 GameStatus = Status.InGame;     // La partie débute
                 Retourner_Dos();
 
-                Score.Text = "Partie en cours : Mode Recherche" + "\n\n" +
+                Score.Text = "Partie en cours : Recherche" + "\n\n" +
                     "→ Trouvez la carte demandée";
 
                 //Séléctionne une image aléatoire parmis celles sur le tapis
@@ -402,7 +402,7 @@ namespace Memory
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Une partie est en cours\n\nVoulez vous vraiment quitter la partie en cours ?", "Avertissement", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     GameStatus = Status.NotInGame;
@@ -426,7 +426,7 @@ namespace Memory
                 GameStatus = Status.Pending;    // Le jeu est mis en attente
                 mode = 2;
 
-                Score.Text = "Partie en cours : Mode Normal" + "\n\n" +
+                Score.Text = "Partie en cours : Memory" + "\n\n" +
                     "→ Retenez bien les cartes";
 
                 // Lance le jeu
@@ -438,12 +438,12 @@ namespace Memory
                 GameStatus = Status.InGame;    // La partie débute
 
 
-                Score.Text = "Partie en cours : Mode Normal" + "\n\n" +
-                    "→ Retrouvez les paires de cartes";
+                Score.Text = "Partie en cours : Memory" + "\n\n" +
+                    "→ Retrouvez les paires de cartes avec le moins de coups possibles";
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Une partie est en cours\n\nVoulez vous vraiment quitter la partie en cours ?", "Avertissement", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     GameStatus = Status.InGame;
@@ -466,15 +466,15 @@ namespace Memory
                 GameStatus = Status.InGame;
                 mode = 3;
 
-                Score.Text = "Partie en cours : Mode Mortel"+ "\n\n" +
-                "→Retrouvez les paires de cartes";
+                Score.Text = "Partie en cours : Mortel"+ "\n\n" +
+                "→ Retrouvez les paires de cartes avec le moins de coups possibles";
 
                 // Lance le jeu
                 Distribution_Aleatoire_Memory();
                 Retourner_Dos();
             }
             else {
-                DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Une partie est en cours\n\nVoulez vous vraiment quitter la partie en cours ?", "Avertissement", MessageBoxButtons.YesNo);
                 
                 if (dialogResult == DialogResult.Yes)
                 {

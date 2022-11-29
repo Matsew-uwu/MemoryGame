@@ -231,36 +231,36 @@
             // btn_facile
             // 
             this.btn_facile.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_facile.Location = new System.Drawing.Point(847, 421);
+            this.btn_facile.Location = new System.Drawing.Point(831, 419);
             this.btn_facile.Margin = new System.Windows.Forms.Padding(4);
             this.btn_facile.Name = "btn_facile";
-            this.btn_facile.Size = new System.Drawing.Size(100, 28);
+            this.btn_facile.Size = new System.Drawing.Size(127, 28);
             this.btn_facile.TabIndex = 6;
-            this.btn_facile.Text = "Facile";
+            this.btn_facile.Text = "Recherche";
             this.btn_facile.UseVisualStyleBackColor = true;
             this.btn_facile.Click += new System.EventHandler(this.Btn_Recherche_Click);
             // 
             // btn_normal
             // 
             this.btn_normal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_normal.Location = new System.Drawing.Point(847, 473);
+            this.btn_normal.Location = new System.Drawing.Point(831, 472);
             this.btn_normal.Margin = new System.Windows.Forms.Padding(4);
             this.btn_normal.Name = "btn_normal";
-            this.btn_normal.Size = new System.Drawing.Size(100, 28);
+            this.btn_normal.Size = new System.Drawing.Size(127, 28);
             this.btn_normal.TabIndex = 7;
-            this.btn_normal.Text = "Normal";
+            this.btn_normal.Text = "Memory";
             this.btn_normal.UseVisualStyleBackColor = true;
             this.btn_normal.Click += new System.EventHandler(this.Btn_Memory_Click);
             // 
             // btn_mortel
             // 
             this.btn_mortel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_mortel.Location = new System.Drawing.Point(847, 527);
+            this.btn_mortel.Location = new System.Drawing.Point(831, 529);
             this.btn_mortel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_mortel.Name = "btn_mortel";
-            this.btn_mortel.Size = new System.Drawing.Size(100, 28);
+            this.btn_mortel.Size = new System.Drawing.Size(127, 28);
             this.btn_mortel.TabIndex = 8;
-            this.btn_mortel.Text = "Mortel";
+            this.btn_mortel.Text = "Memory Mortel";
             this.btn_mortel.UseVisualStyleBackColor = true;
             this.btn_mortel.Click += new System.EventHandler(this.Btn_MemoryHard_Click);
             // 
