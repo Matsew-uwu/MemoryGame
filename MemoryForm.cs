@@ -250,7 +250,7 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Mode Facile \n\n→ Vous avez trouvé la carte\n";
+                    mode_message = "Mode Recherche \n\n→ Vous avez trouvé la carte\n";
                     break;
                 case 2:
                     mode_message = "Mode Normal \n\n→ Trouvez les paires de cartes avec le moins de coups possibles\n";
@@ -298,7 +298,7 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Mode Facile\n\n→ Trouvez la carte demandée\n ";
+                    mode_message = "Mode Recherche\n\n→ Trouvez la carte demandée\n ";
                     break;
                 case 2:
                     mode_message = "Mode Normal\n\n →Trouvez les paires de cartes avec le moins de coups possibles\n";
@@ -343,7 +343,7 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Mode Facile\n";
+                    mode_message = "Mode Recherche\n";
                     break;
                 case 2:
                     mode_message = "Mode Normal\n";
@@ -381,7 +381,7 @@ namespace Memory
                 GameStatus = Status.Pending;    // Le jeu est mis en attente
                 mode = 1;
 
-                Score.Text = "Partie en cours : Mode Facile " + "\n\n" +
+                Score.Text = "Partie en cours : Mode Recherche " + "\n\n" +
                     "→ Retenez les cartes, une seule carte vous sera demandée";
 
                 // Lance le jeu
@@ -392,7 +392,7 @@ namespace Memory
                 GameStatus = Status.InGame;     // La partie débute
                 Retourner_Dos();
 
-                Score.Text = "Partie en cours : Mode Facile" + "\n\n" +
+                Score.Text = "Partie en cours : Mode Recherche" + "\n\n" +
                     "→ Trouvez la carte demandée";
 
                 //Séléctionne une image aléatoire parmis celles sur le tapis
