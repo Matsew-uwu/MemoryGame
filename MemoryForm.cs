@@ -242,7 +242,7 @@ namespace Memory
         }
 
 
-        private void ShowGoodMessage()
+        private void ShowGoodMessage(Boolean hideScore = false)
         {
             message = "Erreur";
 
@@ -252,13 +252,13 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Partie terminée : Mode Facile \n Vous avez trouvé la carte\n";
+                    mode_message = "Partie terminée : Mode Facile \nVous avez trouvé la carte\n";
                     break;
                 case 2:
-                    mode_message = "Partie en cours : Mode Normal \n Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Partie en cours : Mode Normal \nTrouvez les paires de cartes avec le moins de coups possibles\n";
                     break;
                 case 3:
-                    mode_message = "Partie en cours : Mode Mortel \n Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Partie en cours : Mode Mortel \nTrouvez les paires de cartes avec le moins de coups possibles\n";
                     break;
                 default:
                     mode_message = "Partie en cours : Mode erreur\n";
@@ -274,16 +274,23 @@ namespace Memory
             if (alea == 2) { message = "Génial !"; }
             if (alea == 3) { message = "Trop fort !"; }
             if (alea >= 4) { message = "Eclair au chocolat !"; }
-            
+
             // Mise à jour de l'affichage
-            Score.Text = mode_message +
-            "Essais : " + score_message.ToString()+"\n"+
-                message;
+            if (hideScore)
+            {
+                Score.Text = "Partie Terminée : " + mode_message +
+                    "\n" + message;
+            }
+            else
+            {
+                Score.Text = "Partie Terminée : " + mode_message +
+                "Essais : " + score_message.ToString() + "\n" + message;
+            }
 
         }
 
 
-        private void ShowBadMessage()
+        private void ShowBadMessage(Boolean hideScore = false)
         {
             message = "Erreur";
 
@@ -293,13 +300,13 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Mode Facile\n Trouvez la carte demandé, vous avez 4 essais\n ";
+                    mode_message = "Mode Facile\nTrouvez la carte demandée\n ";
                     break;
                 case 2:
-                    mode_message = "Mode Normal\n Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Mode Normal\nTrouvez les paires de cartes avec le moins de coups possibles\n";
                     break;
                 case 3:
-                    mode_message = "Mode Mortel\n Trouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Mode Mortel\nTrouvez les paires de cartes avec le moins de coups possibles\n";
                     break;
                 default:
                     mode_message = "Mode erreur\n";
@@ -317,14 +324,20 @@ namespace Memory
 
             // Mise à jour de l'affichage
 
-            Score.Text = "Partie en cours : " + mode_message +
-                "Essais : " + 
-                score_message.ToString() + "\n" +
-                message;
+            if (hideScore)
+            {
+                Score.Text = "Partie Terminée : " + mode_message +
+                    "\n" + message;
+            }
+            else
+            {
+                Score.Text = "Partie Terminée : " + mode_message +
+                "Essais : " + score_message.ToString() + "\n" + message;
+            }
         }
 
 
-        private void ShowEndMessage()
+        private void ShowEndMessage(Boolean hideScore = false)
         {
             string mode_message;
 
@@ -346,13 +359,22 @@ namespace Memory
             }
 
 
-            Score.Text = "Partie Terminée : " + mode_message +
-                "Essais : " + score_message.ToString()+ "\n" + message;
-            score_message = 0;
+            if (hideScore)
+            {
+                Score.Text = "Partie Terminée : " + mode_message +
+                    "\n" + message;
+                score_message = 0;
+            }
+            else
+            {
+                Score.Text = "Partie Terminée : " + mode_message +
+                "Essais : " + score_message.ToString() + "\n" + message;
+                score_message = 0;
+            }
         }
 
         // -- EventHandler pour les boutons --
-        private async void btn_facile_Click(object sender, EventArgs e)
+        private async void Btn_facile_Click(object sender, EventArgs e)
         {
             if (GameStatus == Status.NotInGame)
             {
@@ -364,7 +386,7 @@ namespace Memory
                 mode = 1;
 
                 Score.Text = "Partie en cours : Mode Facile \n" +
-                    "Retenez les cartes, une seule carte vous sera demandé";
+                    "Retenez les cartes, une seule carte vous sera demandée";
 
                 // Lance le jeu
                 Distribution_Aleatoire();
@@ -375,7 +397,7 @@ namespace Memory
                 Retourner_Dos();
 
                 Score.Text = "Partie en cours : Mode Facile\n" +
-                    "Trouvez la carte demandé, vous avez 4 essais";
+                    "Trouvez la carte demandée";
 
                 //Séléctionne une image aléatoire parmis celles sur le tapis
                 i_recherche = hasard.NumeroAleatoire();
@@ -390,16 +412,16 @@ namespace Memory
                     GameStatus = Status.NotInGame;
                     Reinitialiser();
                     Score.Text = "Partie terminée : vous avez Abandoné !\n"
-                        + "Pour jouer selectionner d'abord un mode de jeu";
+                        + "Pour jouer sélectionner d'abord un mode de jeu";
 
                     // Lance la partie concernée
-                    btn_facile_Click(sender, e);
+                    Btn_facile_Click(sender, e);
                 }
             }
         }
 
 
-        private async void btn_normal_Click(object sender, EventArgs e)
+        private async void Btn_normal_Click(object sender, EventArgs e)
         {
             if (GameStatus == Status.NotInGame)
             {
@@ -433,10 +455,10 @@ namespace Memory
                     GameStatus = Status.InGame;
                     Reinitialiser();
                     Score.Text = "Partie Terminée : Vous avez abandonné !\n"
-                        + "Pour jouer selectionner d'abord un mode de jeu";
+                        + "Pour jouer sélectionner d'abord un mode de jeu";
 
                     // Lance la partie concernée
-                    btn_normal_Click(sender, e);
+                    Btn_normal_Click(sender, e);
                 }
             }
         }
@@ -467,7 +489,7 @@ namespace Memory
                     GameStatus = Status.NotInGame;
                     Reinitialiser();
                     Score.Text = "Partie Terminée : Vous avez abandonné !\n"
-                        + "Pour jouer selectionner d'abord un mode de jeu";
+                        + "Pour jouer sélectionner d'abord un mode de jeu";
 
                     // Lance la partie concernée
                     Btn_mortel_Click(sender, e);
@@ -476,12 +498,6 @@ namespace Memory
             
         }
 
-
-        private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
-        {
-            Reinitialiser();
-            Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
-        }
 
 
         // -- EventHandler pour chaque PictureBox --
@@ -499,8 +515,7 @@ namespace Memory
                 // Vérifie si la carte correspond à celle recherché
                 if (i_image == i_recherche)
                 {
-                    ShowGoodMessage();
-                    // La partie prend fin
+                    ShowGoodMessage(true);
 
                     // La partie est mise en attente le temps de l'animation
                     GameStatus = Status.Pending;
@@ -513,7 +528,7 @@ namespace Memory
                 }
                 else
                 {
-                    ShowBadMessage();
+                    ShowBadMessage(true);
                 }
                 nb_cartes++;
             }
@@ -669,7 +684,15 @@ namespace Memory
         /* ------------------------------ */
 
         // Méthodes de debug
-        /*private void btn_Retourner_Click(object sender, EventArgs e)
+
+        /*
+        private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
+        {
+            Reinitialiser();
+            Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
+        } 
+
+        private void btn_Retourner_Click(object sender, EventArgs e)
         {
             Retourner_Dos();
         }
