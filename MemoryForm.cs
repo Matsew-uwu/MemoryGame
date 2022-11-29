@@ -502,7 +502,7 @@ namespace Memory
         }
 
 
-        private void Memory_V2_Handler(object sender, EventArgs e, int index)
+        private async void Memory_V2_Handler(object sender, EventArgs e, int index)
         {
             /* Gestion de la version Memory */
 
@@ -539,6 +539,9 @@ namespace Memory
                     // Réinitialise et retourne les deux cartes
                     Image_1 = 0;
                     Image_2 = 0;
+
+                    await Task.Delay(1000);
+
                     PbImage1.Image = ilSabotDeCartes.Images[0];
                     PbImage2.Image = ilSabotDeCartes.Images[0];
 
