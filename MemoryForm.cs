@@ -370,7 +370,7 @@ namespace Memory
         }
 
         // -- EventHandler pour les boutons --
-        private async void Btn_facile_Click(object sender, EventArgs e)
+        private async void Btn_Recherche_Click(object sender, EventArgs e)
         {
             if (GameStatus == Status.NotInGame)
             {
@@ -409,13 +409,13 @@ namespace Memory
                     Reinitialiser();
 
                     // Lance la partie concernée
-                    Btn_facile_Click(sender, e);
+                    Btn_Recherche_Click(sender, e);
                 }
             }
         }
 
 
-        private async void Btn_normal_Click(object sender, EventArgs e)
+        private async void Btn_Memory_Click(object sender, EventArgs e)
         {
             if (GameStatus == Status.NotInGame)
             {
@@ -450,13 +450,13 @@ namespace Memory
                     Reinitialiser();
 
                     // Lance la partie concernée
-                    Btn_normal_Click(sender, e);
+                    Btn_Memory_Click(sender, e);
                 }
             }
         }
 
 
-        private void Btn_mortel_Click(object sender, EventArgs e)
+        private void Btn_MemoryHard_Click(object sender, EventArgs e)
         {
             if (GameStatus == Status.NotInGame) {
                 // -- Version 3 --
@@ -482,7 +482,7 @@ namespace Memory
                     Reinitialiser();
 
                     // Lance la partie concernée
-                    Btn_mortel_Click(sender, e);
+                    Btn_MemoryHard_Click(sender, e);
                 }
             }
             

@@ -238,7 +238,7 @@
             this.btn_facile.TabIndex = 6;
             this.btn_facile.Text = "Facile";
             this.btn_facile.UseVisualStyleBackColor = true;
-            this.btn_facile.Click += new System.EventHandler(this.Btn_facile_Click);
+            this.btn_facile.Click += new System.EventHandler(this.Btn_Recherche_Click);
             // 
             // btn_normal
             // 
@@ -250,7 +250,7 @@
             this.btn_normal.TabIndex = 7;
             this.btn_normal.Text = "Normal";
             this.btn_normal.UseVisualStyleBackColor = true;
-            this.btn_normal.Click += new System.EventHandler(this.Btn_normal_Click);
+            this.btn_normal.Click += new System.EventHandler(this.Btn_Memory_Click);
             // 
             // btn_mortel
             // 
@@ -262,7 +262,7 @@
             this.btn_mortel.TabIndex = 8;
             this.btn_mortel.Text = "Mortel";
             this.btn_mortel.UseVisualStyleBackColor = true;
-            this.btn_mortel.Click += new System.EventHandler(this.Btn_mortel_Click);
+            this.btn_mortel.Click += new System.EventHandler(this.Btn_MemoryHard_Click);
             // 
             // label1
             // 
