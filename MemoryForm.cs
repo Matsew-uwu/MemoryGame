@@ -649,22 +649,22 @@ namespace Memory
             Pb_XX_Click(sender, e, 3);
         }
 
-        private void pb_05_Click(object sender, EventArgs e)
+        private void Pb_05_Click(object sender, EventArgs e)
         {
             Pb_XX_Click(sender, e, 4);
         }
 
-        private void pb_06_Click(object sender, EventArgs e)
+        private void Pb_06_Click(object sender, EventArgs e)
         {
             Pb_XX_Click(sender, e, 5);
         }
 
-        private void pb_07_Click(object sender, EventArgs e)
+        private void Pb_07_Click(object sender, EventArgs e)
         {
             Pb_XX_Click(sender, e, 6);
         }
 
-        private void pb_08_Click(object sender, EventArgs e)
+        private void Pb_08_Click(object sender, EventArgs e)
         {
             Pb_XX_Click(sender, e, 7);
         }

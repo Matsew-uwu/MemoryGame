@@ -192,7 +192,7 @@
             this.pb_05.Size = new System.Drawing.Size(133, 123);
             this.pb_05.TabIndex = 1;
             this.pb_05.TabStop = false;
-            this.pb_05.Click += new System.EventHandler(this.pb_05_Click);
+            this.pb_05.Click += new System.EventHandler(this.Pb_05_Click);
             // 
             // pb_06
             // 
@@ -203,7 +203,7 @@
             this.pb_06.Size = new System.Drawing.Size(133, 123);
             this.pb_06.TabIndex = 2;
             this.pb_06.TabStop = false;
-            this.pb_06.Click += new System.EventHandler(this.pb_06_Click);
+            this.pb_06.Click += new System.EventHandler(this.Pb_06_Click);
             // 
             // pb_07
             // 
@@ -214,7 +214,7 @@
             this.pb_07.Size = new System.Drawing.Size(133, 123);
             this.pb_07.TabIndex = 3;
             this.pb_07.TabStop = false;
-            this.pb_07.Click += new System.EventHandler(this.pb_07_Click);
+            this.pb_07.Click += new System.EventHandler(this.Pb_07_Click);
             // 
             // pb_08
             // 
@@ -225,7 +225,7 @@
             this.pb_08.Size = new System.Drawing.Size(133, 123);
             this.pb_08.TabIndex = 4;
             this.pb_08.TabStop = false;
-            this.pb_08.Click += new System.EventHandler(this.pb_08_Click);
+            this.pb_08.Click += new System.EventHandler(this.Pb_08_Click);
             // 
             // btn_facile
             // 
