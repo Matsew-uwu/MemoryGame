@@ -426,8 +426,8 @@ namespace Memory
                 GameStatus = Status.Pending;    // Le jeu est mis en attente
                 mode = 2;
 
-                Score.Text = "Partie en cours : Mode Normal\n" +
-                    "Retenez bien les cartes";
+                Score.Text = "Partie en cours : Mode Normal" + "\n\n" +
+                    "→ Retenez bien les cartes";
 
                 // Lance le jeu
                 Distribution_Aleatoire_Memory();
@@ -439,7 +439,7 @@ namespace Memory
 
 
                 Score.Text = "Partie en cours : Mode Normal" + "\n\n" +
-                    "→Retrouvez les paires de cartes";
+                    "→ Retrouvez les paires de cartes";
             }
             else
             {

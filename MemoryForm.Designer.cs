@@ -47,6 +47,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Titre = new System.Windows.Forms.Label();
             this.Score = new System.Windows.Forms.Label();
+            this.Lb_GameMode = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Recherche)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_04)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_03)).BeginInit();
@@ -109,7 +110,7 @@
             // 
             this.pb_Recherche.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.pb_Recherche.Location = new System.Drawing.Point(831, 325);
-            this.pb_Recherche.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_Recherche.Margin = new System.Windows.Forms.Padding(4);
             this.pb_Recherche.Name = "pb_Recherche";
             this.pb_Recherche.Size = new System.Drawing.Size(133, 123);
             this.pb_Recherche.TabIndex = 5;
@@ -119,7 +120,7 @@
             // 
             this.pb_04.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pb_04.Location = new System.Drawing.Point(442, 4);
-            this.pb_04.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_04.Margin = new System.Windows.Forms.Padding(4);
             this.pb_04.Name = "pb_04";
             this.pb_04.Size = new System.Drawing.Size(133, 123);
             this.pb_04.TabIndex = 0;
@@ -130,7 +131,7 @@
             // 
             this.pb_03.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pb_03.Location = new System.Drawing.Point(296, 4);
-            this.pb_03.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_03.Margin = new System.Windows.Forms.Padding(4);
             this.pb_03.Name = "pb_03";
             this.pb_03.Size = new System.Drawing.Size(133, 123);
             this.pb_03.TabIndex = 0;
@@ -141,7 +142,7 @@
             // 
             this.pb_02.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pb_02.Location = new System.Drawing.Point(150, 4);
-            this.pb_02.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_02.Margin = new System.Windows.Forms.Padding(4);
             this.pb_02.Name = "pb_02";
             this.pb_02.Size = new System.Drawing.Size(133, 123);
             this.pb_02.TabIndex = 0;
@@ -152,7 +153,7 @@
             // 
             this.pb_01.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pb_01.Location = new System.Drawing.Point(4, 4);
-            this.pb_01.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_01.Margin = new System.Windows.Forms.Padding(4);
             this.pb_01.Name = "pb_01";
             this.pb_01.Size = new System.Drawing.Size(133, 123);
             this.pb_01.TabIndex = 0;
@@ -175,7 +176,7 @@
             this.tlpTapisDeCartes.Controls.Add(this.pb_07, 2, 1);
             this.tlpTapisDeCartes.Controls.Add(this.pb_08, 3, 1);
             this.tlpTapisDeCartes.Location = new System.Drawing.Point(85, 78);
-            this.tlpTapisDeCartes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tlpTapisDeCartes.Margin = new System.Windows.Forms.Padding(4);
             this.tlpTapisDeCartes.Name = "tlpTapisDeCartes";
             this.tlpTapisDeCartes.RowCount = 2;
             this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -187,7 +188,7 @@
             // 
             this.pb_05.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pb_05.Location = new System.Drawing.Point(4, 137);
-            this.pb_05.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_05.Margin = new System.Windows.Forms.Padding(4);
             this.pb_05.Name = "pb_05";
             this.pb_05.Size = new System.Drawing.Size(133, 123);
             this.pb_05.TabIndex = 1;
@@ -198,7 +199,7 @@
             // 
             this.pb_06.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pb_06.Location = new System.Drawing.Point(150, 137);
-            this.pb_06.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_06.Margin = new System.Windows.Forms.Padding(4);
             this.pb_06.Name = "pb_06";
             this.pb_06.Size = new System.Drawing.Size(133, 123);
             this.pb_06.TabIndex = 2;
@@ -209,7 +210,7 @@
             // 
             this.pb_07.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pb_07.Location = new System.Drawing.Point(296, 137);
-            this.pb_07.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_07.Margin = new System.Windows.Forms.Padding(4);
             this.pb_07.Name = "pb_07";
             this.pb_07.Size = new System.Drawing.Size(133, 123);
             this.pb_07.TabIndex = 3;
@@ -220,7 +221,7 @@
             // 
             this.pb_08.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pb_08.Location = new System.Drawing.Point(442, 137);
-            this.pb_08.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_08.Margin = new System.Windows.Forms.Padding(4);
             this.pb_08.Name = "pb_08";
             this.pb_08.Size = new System.Drawing.Size(133, 123);
             this.pb_08.TabIndex = 4;
@@ -230,8 +231,8 @@
             // btn_facile
             // 
             this.btn_facile.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_facile.Location = new System.Drawing.Point(831, 124);
-            this.btn_facile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_facile.Location = new System.Drawing.Point(847, 132);
+            this.btn_facile.Margin = new System.Windows.Forms.Padding(4);
             this.btn_facile.Name = "btn_facile";
             this.btn_facile.Size = new System.Drawing.Size(100, 28);
             this.btn_facile.TabIndex = 6;
@@ -242,8 +243,8 @@
             // btn_normal
             // 
             this.btn_normal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_normal.Location = new System.Drawing.Point(831, 176);
-            this.btn_normal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_normal.Location = new System.Drawing.Point(847, 184);
+            this.btn_normal.Margin = new System.Windows.Forms.Padding(4);
             this.btn_normal.Name = "btn_normal";
             this.btn_normal.Size = new System.Drawing.Size(100, 28);
             this.btn_normal.TabIndex = 7;
@@ -253,9 +254,9 @@
             // 
             // btn_mortel
             // 
-            this.btn_mortel.Cursor = System.Windows.Forms.Cursors.No;
-            this.btn_mortel.Location = new System.Drawing.Point(831, 230);
-            this.btn_mortel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_mortel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_mortel.Location = new System.Drawing.Point(847, 238);
+            this.btn_mortel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_mortel.Name = "btn_mortel";
             this.btn_mortel.Size = new System.Drawing.Size(100, 28);
             this.btn_mortel.TabIndex = 8;
@@ -270,12 +271,12 @@
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label1.Location = new System.Drawing.Point(735, 75);
+            this.label1.Location = new System.Drawing.Point(826, 78);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(300, 29);
+            this.label1.Size = new System.Drawing.Size(148, 29);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Selection du mode de jeu :";
+            this.label1.Text = "Mode de jeu";
             // 
             // Titre
             // 
@@ -289,9 +290,8 @@
             // 
             // Score
             // 
-            this.Score.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Score.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Score.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.Score.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.Score.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Score.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Score.Font = new System.Drawing.Font("MS Reference Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Score.Location = new System.Drawing.Point(16, 367);
@@ -301,6 +301,20 @@
             this.Score.TabIndex = 11;
             this.Score.Text = "Veuillez sélectionner votre mode de jeu";
             // 
+            // Lb_GameMode
+            // 
+            this.Lb_GameMode.AutoSize = true;
+            this.Lb_GameMode.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.Lb_GameMode.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Lb_GameMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lb_GameMode.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.Lb_GameMode.Location = new System.Drawing.Point(826, 78);
+            this.Lb_GameMode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Lb_GameMode.Name = "Lb_GameMode";
+            this.Lb_GameMode.Size = new System.Drawing.Size(148, 29);
+            this.Lb_GameMode.TabIndex = 9;
+            this.Lb_GameMode.Text = "Mode de jeu";
+            // 
             // MemoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -309,13 +323,14 @@
             this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.Score);
             this.Controls.Add(this.Titre);
+            this.Controls.Add(this.Lb_GameMode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_mortel);
             this.Controls.Add(this.btn_normal);
             this.Controls.Add(this.btn_facile);
             this.Controls.Add(this.pb_Recherche);
             this.Controls.Add(this.tlpTapisDeCartes);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MemoryForm";
             this.Text = "Memory";
             ((System.ComponentModel.ISupportInitialize)(this.pb_Recherche)).EndInit();
@@ -351,6 +366,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label Titre;
         private System.Windows.Forms.Label Score;
+        private System.Windows.Forms.Label Lb_GameMode;
     }
 }
 
