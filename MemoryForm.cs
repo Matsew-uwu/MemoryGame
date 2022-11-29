@@ -27,12 +27,11 @@ namespace Memory
         PictureBox PbImage1;            // Les PictureBox des cartes retournées
         PictureBox PbImage2;
         int CurrentIndexImage;          // L'indice de la carte retournée dans le tapis
-        int nb_cartes = 0;              // Nb de carte retourné
+        int nb_cartes = 0;              // Nb de carte retournées
 
         Boolean cartes_retournees;      // true si la carte est retournée (de dos) ; false autrement
         Status GameStatus;                 // Varibale indiquant si la partie est en cours
         int mode;                       // Indique le mode de jeu → 1: version 1 - 2: Memory - 3: Memory hardcore
-        int score_message;              // Affiche le nb d'essais en jeu (nombre de cartes retournées)
         string message;                 // Un petit message d'encouragement !
 
         public enum Status
@@ -61,7 +60,6 @@ namespace Memory
             pb_Recherche.Image = null;
             i_recherche = 0;
             GameStatus = Status.NotInGame;
-            score_message = 0;
             PbImage1 = null;
             PbImage2 = null;
             message = "";
@@ -252,16 +250,16 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Partie terminée : Mode Facile \nVous avez trouvé la carte\n";
+                    mode_message = "Mode Facile \n\n→ Vous avez trouvé la carte\n";
                     break;
                 case 2:
-                    mode_message = "Partie en cours : Mode Normal \nTrouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Mode Normal \n\n→ Trouvez les paires de cartes avec le moins de coups possibles\n";
                     break;
                 case 3:
-                    mode_message = "Partie en cours : Mode Mortel \nTrouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Mode Mortel \n\n→ Trouvez les paires de cartes avec le moins de coups possibles\n";
                     break;
                 default:
-                    mode_message = "Partie en cours : Mode erreur\n";
+                    mode_message = "Mode erreur\n";
                     break;
             }
 
@@ -278,13 +276,13 @@ namespace Memory
             // Mise à jour de l'affichage
             if (hideScore)
             {
-                Score.Text = "Partie Terminée : " + mode_message +
+                Score.Text = "Partie en cours : " + mode_message +
                     "\n" + message;
             }
             else
             {
-                Score.Text = "Partie Terminée : " + mode_message +
-                "Essais : " + score_message.ToString() + "\n" + message;
+                Score.Text = "Partie en cours : " + mode_message +
+                "Essais : " + nb_cartes.ToString() + "\n" + message;
             }
 
         }
@@ -300,13 +298,13 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Mode Facile\nTrouvez la carte demandée\n ";
+                    mode_message = "Mode Facile\n\n→ Trouvez la carte demandée\n ";
                     break;
                 case 2:
-                    mode_message = "Mode Normal\nTrouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Mode Normal\n\n →Trouvez les paires de cartes avec le moins de coups possibles\n";
                     break;
                 case 3:
-                    mode_message = "Mode Mortel\nTrouvez les paires de cartes avec le moins de coups possibles\n";
+                    mode_message = "Mode Mortel\n\n →Trouvez les paires de cartes avec le moins de coups possibles\n";
                     break;
                 default:
                     mode_message = "Mode erreur\n";
@@ -332,7 +330,7 @@ namespace Memory
             else
             {
                 Score.Text = "Partie Terminée : " + mode_message +
-                "Essais : " + score_message.ToString() + "\n" + message;
+                "Essais : " + nb_cartes.ToString() + "\n" + message;
             }
         }
 
@@ -363,13 +361,11 @@ namespace Memory
             {
                 Score.Text = "Partie Terminée : " + mode_message +
                     "\n" + message;
-                score_message = 0;
             }
             else
             {
                 Score.Text = "Partie Terminée : " + mode_message +
-                "Essais : " + score_message.ToString() + "\n" + message;
-                score_message = 0;
+                "Essais : " + nb_cartes.ToString() + "\n" + message;
             }
         }
 
@@ -396,8 +392,8 @@ namespace Memory
                 GameStatus = Status.InGame;     // La partie débute
                 Retourner_Dos();
 
-                Score.Text = "Partie en cours : Mode Facile\n" +
-                    "Trouvez la carte demandée";
+                Score.Text = "Partie en cours : Mode Facile" + "\n\n" +
+                    "→ Trouvez la carte demandée";
 
                 //Séléctionne une image aléatoire parmis celles sur le tapis
                 i_recherche = hasard.NumeroAleatoire();
@@ -411,8 +407,6 @@ namespace Memory
                 {
                     GameStatus = Status.NotInGame;
                     Reinitialiser();
-                    Score.Text = "Partie terminée : vous avez Abandoné !\n"
-                        + "Pour jouer sélectionner d'abord un mode de jeu";
 
                     // Lance la partie concernée
                     Btn_facile_Click(sender, e);
@@ -444,8 +438,8 @@ namespace Memory
                 GameStatus = Status.InGame;    // La partie débute
 
 
-                Score.Text = "Partie en cours : Mode Normal\n" +
-                    "Retrouvez les paires de cartes";
+                Score.Text = "Partie en cours : Mode Normal" + "\n\n" +
+                    "→Retrouvez les paires de cartes";
             }
             else
             {
@@ -454,8 +448,6 @@ namespace Memory
                 {
                     GameStatus = Status.InGame;
                     Reinitialiser();
-                    Score.Text = "Partie Terminée : Vous avez abandonné !\n"
-                        + "Pour jouer sélectionner d'abord un mode de jeu";
 
                     // Lance la partie concernée
                     Btn_normal_Click(sender, e);
@@ -474,8 +466,8 @@ namespace Memory
                 GameStatus = Status.InGame;
                 mode = 3;
 
-                Score.Text = "Partie en cours : Mode Mortel\n" +
-                "Retrouvez les paires de cartes";
+                Score.Text = "Partie en cours : Mode Mortel"+ "\n\n" +
+                "→Retrouvez les paires de cartes";
 
                 // Lance le jeu
                 Distribution_Aleatoire_Memory();
@@ -488,8 +480,6 @@ namespace Memory
                 {
                     GameStatus = Status.NotInGame;
                     Reinitialiser();
-                    Score.Text = "Partie Terminée : Vous avez abandonné !\n"
-                        + "Pour jouer sélectionner d'abord un mode de jeu";
 
                     // Lance la partie concernée
                     Btn_mortel_Click(sender, e);
@@ -538,6 +528,7 @@ namespace Memory
                 MessageBox.Show(String.Format("{0} essais ont étés effectués !", nbCartesSurTapis / 2));
                 // Retourner/Afficher toutes les cartes
                 Retourner_Visible();
+                ShowEndMessage(true);
                 Reinitialiser();
             }
         }
@@ -563,19 +554,16 @@ namespace Memory
                 // Vérifie si la carte correspond à celle recherchée
                 if (Image_2 == Image_1)
                 {
-                    score_message = score_message + 1;
-
-                    ShowGoodMessage();
-
                     nb_cartes += 2;
                     Image_1 = 0;
                     Image_2 = 0;
+                    
+                    ShowGoodMessage();
                 }
 
-                else
-                {
-                    score_message = score_message + 1;
-
+                else 
+                { 
+                
                     ShowBadMessage();
 
                     // Réinitialise et retourne les deux cartes
