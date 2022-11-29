@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dllLoto;
@@ -50,6 +51,7 @@ namespace Memory
             pb_Recherche.Image = null;
             i_recherche = 0;
             inGame = false;
+            score_message = 0;
             PbImage1 = null;
             PbImage2 = null;
         }
@@ -311,21 +313,18 @@ namespace Memory
                     break;
             }
             Score.Text = "Partie Terminée : " + mode_message +
-                "Cartes retournées : " + score_message.ToString()+ "\n" + message;
+                "Essais : " + score_message.ToString()+ "\n" + message;
             score_message = 0;
             Reinitialiser(); //on réinitialise le jeu
-            Console.WriteLine("end");
-            Console.WriteLine(inGame);
         }
 
         // -- EventHandler pour les boutons --
         private void btn_mortel_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("mortel");
-            Console.WriteLine(inGame);
             if (inGame==false) {
                 // -- Version 3
                 // Lance la partie
+                score_message = 0;
                 inGame = true;
                 Console.WriteLine(inGame);
                 mode = 3;
@@ -335,18 +334,30 @@ namespace Memory
                 Distribution_Aleatoire_Memory();
                 Retourner_Dos();
             }
-            else { MessageBox.Show("Avertissement, vous êtes actuellement dans une partie, vous devez d'abord la terminer avant de selectionner un autre mode de jeu", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            else {
+                DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    inGame = false;
+                    Reinitialiser();
+                    Score.Text = "Partie Terminée : Vous avez abandonné !\n"
+                        +"Pour jouer selectionner d'abord un mode de jeu";
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    Console.Write("fermer la fenêtre");
+                }
+            }
             
         }
 
         private async void btn_normal_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("normal");
-            Console.WriteLine(inGame);
             if (inGame == false)
             {
                 // -- Version 2 --
                 // Lance la partie
+                score_message = 0;
                 inGame = true;
                 Console.WriteLine(inGame);
                 mode = 2;
@@ -359,17 +370,30 @@ namespace Memory
                 Score.Text = "Partie en cours : Mode Normal\n" +
                     "Retrouvez les paires de cartes";
             }
-            else { MessageBox.Show("Avertissement, vous êtes actuellement dans une partie, vous devez d'abord la terminer avant de selectionner un autre mode de jeu", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-    }
+            else
+            { 
+                DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    inGame = false;
+                    Reinitialiser();
+                    Score.Text = "Partie Terminée : Vous avez abandonné !\n" 
+                        + "Pour jouer selectionner d'abord un mode de jeu";
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    Console.Write("fermer la fenêtre");
+                }
+            }
+        }
 
         private async void btn_facile_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("facile");
-            Console.WriteLine(inGame);
             if (inGame == false)
             {
                 // -- Version 1 --
                 // Lance la partie
+                score_message = 0;
                 inGame = true;
                 Console.WriteLine(inGame);
                 mode = 1;
@@ -386,46 +410,61 @@ namespace Memory
                 //affiche l'image sur la zone dédiée
                 pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
             }
-            else { MessageBox.Show("Avertissement, vous êtes actuellement dans une partie, vous devez d'abord la terminer avant de selectionner un autre mode de jeu", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            else
+            {
+               
+                DialogResult dialogResult = MessageBox.Show("Une partie est en cours, \nVoulez vous vraiment quitter la partie en cours?", "Avertissement", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    inGame = false;
+                    Reinitialiser();
+                    Score.Text = "Partie terminée : vous avez Abandoné !\n" 
+                        + "Pour jouer selectionner d'abord un mode de jeu";
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    Console.Write("fermer la fenêtre");
+                }
+            }
         }
 
-/*        private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
-        {
-            Reinitialiser();
-            Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
-        }*/
+                /*        private void Btn_Distribuer_Click(object sender, EventArgs e) // Bouton de distribution des cartes sur le tapis
+                        {
+                            Reinitialiser();
+                            Distribution_Aleatoire(); // Distribution de cartes aléatoires sur le tapis
+                        }*/
 
 
-/*        private void btn_Retourner_Click(object sender, EventArgs e)
-        {
-            Retourner_Dos();
-        }*/
+                /*        private void btn_Retourner_Click(object sender, EventArgs e)
+                        {
+                            Retourner_Dos();
+                        }*/
 
-/*        private void Btn_Jouer_Click(object sender, EventArgs e)
-        {
-            // Lance le jeu
-            Reinitialiser();
-            Distribution_Aleatoire_Memory();
-            Retourner_Dos();
+                /*        private void Btn_Jouer_Click(object sender, EventArgs e)
+                        {
+                            // Lance le jeu
+                            Reinitialiser();
+                            Distribution_Aleatoire_Memory();
+                            Retourner_Dos();
 
-            // -- Version 1
-            // Séléctionne une image aléatoire parmis celles sur le tapis
-            i_recherche = hasard.NumeroAleatoire();
-            pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
+                            // -- Version 1
+                            // Séléctionne une image aléatoire parmis celles sur le tapis
+                            i_recherche = hasard.NumeroAleatoire();
+                            pb_Recherche.Image = ilSabotDeCartes.Images[i_recherche];
 
-            // -- Version 2 
-            // Lance la partie
-            inGame = true;
-        }*/
+                            // -- Version 2 
+                            // Lance la partie
+                            inGame = true;
+                        }*/
 
-        // Bouton de test pour la loterie fournis de base
-/*        private void Btn_Test_Click(object sender, EventArgs e)
-        {
-            Distribution_Aleatoire_Memory();
-        }*/
+                // Bouton de test pour la loterie fournis de base
+                /*        private void Btn_Test_Click(object sender, EventArgs e)
+                        {
+                            Distribution_Aleatoire_Memory();
+                        }*/
 
 
-        // -- EventHandler pour chaque PictureBox --
+                // -- EventHandler pour chaque PictureBox --
 
         private void Memory_V2_Handler(object sender, EventArgs e, int index)
         {
@@ -499,9 +538,9 @@ namespace Memory
                 nb_cartes++;
             }
 
-            if (nb_cartes >= nbCartesSurTapis / 2)
+            if (score_message >= nbCartesSurTapis / 2)
             {
-                MessageBox.Show(String.Format("{0} cartes sont déjà retournées !", nbCartesSurTapis / 2));
+                MessageBox.Show(String.Format("{0} essais ont étés effectués !", nbCartesSurTapis / 2));
                 // Retourner/Afficher toutes les cartes
                 Retourner_Visible();
                 Reinitialiser();
