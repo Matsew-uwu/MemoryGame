@@ -45,6 +45,7 @@ namespace Memory
 
         public MemoryForm()
         {
+            MaximizeBox = false; // Empêche l'agrandissement de la fenêtre
             InitializeComponent();
             // Des cartes sont distribuées et retournées au lancement de l'application
             Reinitialiser();
