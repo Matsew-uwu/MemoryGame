@@ -37,10 +37,14 @@
             this.pb_02 = new System.Windows.Forms.PictureBox();
             this.pb_01 = new System.Windows.Forms.PictureBox();
             this.tlpTapisDeCartes = new System.Windows.Forms.TableLayoutPanel();
-            this.pb_05 = new System.Windows.Forms.PictureBox();
-            this.pb_06 = new System.Windows.Forms.PictureBox();
             this.pb_07 = new System.Windows.Forms.PictureBox();
             this.pb_08 = new System.Windows.Forms.PictureBox();
+            this.pb_06 = new System.Windows.Forms.PictureBox();
+            this.pb_05 = new System.Windows.Forms.PictureBox();
+            this.Pb_09 = new System.Windows.Forms.PictureBox();
+            this.Pb_10 = new System.Windows.Forms.PictureBox();
+            this.Pb_11 = new System.Windows.Forms.PictureBox();
+            this.Pb_12 = new System.Windows.Forms.PictureBox();
             this.btn_facile = new System.Windows.Forms.Button();
             this.btn_normal = new System.Windows.Forms.Button();
             this.btn_mortel = new System.Windows.Forms.Button();
@@ -54,10 +58,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb_02)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_01)).BeginInit();
             this.tlpTapisDeCartes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_05)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_06)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_07)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_08)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_06)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_05)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_09)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_12)).BeginInit();
             this.SuspendLayout();
             // 
             // ilSabotDeCartes
@@ -109,7 +117,7 @@
             // pb_Recherche
             // 
             this.pb_Recherche.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.pb_Recherche.Location = new System.Drawing.Point(619, 114);
+            this.pb_Recherche.Location = new System.Drawing.Point(618, 180);
             this.pb_Recherche.Name = "pb_Recherche";
             this.pb_Recherche.Size = new System.Drawing.Size(100, 100);
             this.pb_Recherche.TabIndex = 5;
@@ -157,6 +165,7 @@
             // 
             // tlpTapisDeCartes
             // 
+            this.tlpTapisDeCartes.AutoSize = true;
             this.tlpTapisDeCartes.ColumnCount = 4;
             this.tlpTapisDeCartes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpTapisDeCartes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -166,37 +175,22 @@
             this.tlpTapisDeCartes.Controls.Add(this.pb_02, 1, 0);
             this.tlpTapisDeCartes.Controls.Add(this.pb_03, 2, 0);
             this.tlpTapisDeCartes.Controls.Add(this.pb_04, 3, 0);
-            this.tlpTapisDeCartes.Controls.Add(this.pb_05, 0, 1);
-            this.tlpTapisDeCartes.Controls.Add(this.pb_06, 1, 1);
+            this.tlpTapisDeCartes.Controls.Add(this.pb_05, 1, 1);
+            this.tlpTapisDeCartes.Controls.Add(this.pb_06, 0, 1);
             this.tlpTapisDeCartes.Controls.Add(this.pb_07, 2, 1);
             this.tlpTapisDeCartes.Controls.Add(this.pb_08, 3, 1);
-            this.tlpTapisDeCartes.Location = new System.Drawing.Point(64, 63);
+            this.tlpTapisDeCartes.Controls.Add(this.Pb_09, 0, 2);
+            this.tlpTapisDeCartes.Controls.Add(this.Pb_10, 1, 2);
+            this.tlpTapisDeCartes.Controls.Add(this.Pb_11, 2, 2);
+            this.tlpTapisDeCartes.Controls.Add(this.Pb_12, 3, 2);
+            this.tlpTapisDeCartes.Location = new System.Drawing.Point(64, 69);
             this.tlpTapisDeCartes.Name = "tlpTapisDeCartes";
-            this.tlpTapisDeCartes.RowCount = 2;
+            this.tlpTapisDeCartes.RowCount = 3;
             this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 112F));
-            this.tlpTapisDeCartes.Size = new System.Drawing.Size(440, 220);
+            this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 109F));
+            this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 107F));
+            this.tlpTapisDeCartes.Size = new System.Drawing.Size(440, 324);
             this.tlpTapisDeCartes.TabIndex = 0;
-            // 
-            // pb_05
-            // 
-            this.pb_05.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_05.Location = new System.Drawing.Point(3, 111);
-            this.pb_05.Name = "pb_05";
-            this.pb_05.Size = new System.Drawing.Size(100, 100);
-            this.pb_05.TabIndex = 1;
-            this.pb_05.TabStop = false;
-            this.pb_05.Click += new System.EventHandler(this.Pb_05_Click);
-            // 
-            // pb_06
-            // 
-            this.pb_06.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb_06.Location = new System.Drawing.Point(113, 111);
-            this.pb_06.Name = "pb_06";
-            this.pb_06.Size = new System.Drawing.Size(100, 100);
-            this.pb_06.TabIndex = 2;
-            this.pb_06.TabStop = false;
-            this.pb_06.Click += new System.EventHandler(this.Pb_06_Click);
             // 
             // pb_07
             // 
@@ -218,10 +212,70 @@
             this.pb_08.TabStop = false;
             this.pb_08.Click += new System.EventHandler(this.Pb_08_Click);
             // 
+            // pb_06
+            // 
+            this.pb_06.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pb_06.Location = new System.Drawing.Point(3, 111);
+            this.pb_06.Name = "pb_06";
+            this.pb_06.Size = new System.Drawing.Size(100, 100);
+            this.pb_06.TabIndex = 2;
+            this.pb_06.TabStop = false;
+            this.pb_06.Click += new System.EventHandler(this.Pb_06_Click);
+            // 
+            // pb_05
+            // 
+            this.pb_05.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pb_05.Location = new System.Drawing.Point(113, 111);
+            this.pb_05.Name = "pb_05";
+            this.pb_05.Size = new System.Drawing.Size(100, 100);
+            this.pb_05.TabIndex = 1;
+            this.pb_05.TabStop = false;
+            this.pb_05.Click += new System.EventHandler(this.Pb_05_Click);
+            // 
+            // Pb_09
+            // 
+            this.Pb_09.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Pb_09.Location = new System.Drawing.Point(223, 220);
+            this.Pb_09.Name = "Pb_09";
+            this.Pb_09.Size = new System.Drawing.Size(100, 100);
+            this.Pb_09.TabIndex = 8;
+            this.Pb_09.TabStop = false;
+            this.Pb_09.Click += new System.EventHandler(this.Pb_09_Click);
+            // 
+            // Pb_10
+            // 
+            this.Pb_10.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Pb_10.Location = new System.Drawing.Point(113, 220);
+            this.Pb_10.Name = "Pb_10";
+            this.Pb_10.Size = new System.Drawing.Size(100, 100);
+            this.Pb_10.TabIndex = 7;
+            this.Pb_10.TabStop = false;
+            this.Pb_10.Click += new System.EventHandler(this.Pb_10_Click);
+            // 
+            // Pb_11
+            // 
+            this.Pb_11.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Pb_11.Location = new System.Drawing.Point(333, 220);
+            this.Pb_11.Name = "Pb_11";
+            this.Pb_11.Size = new System.Drawing.Size(100, 100);
+            this.Pb_11.TabIndex = 6;
+            this.Pb_11.TabStop = false;
+            this.Pb_11.Click += new System.EventHandler(this.Pb_11_Click);
+            // 
+            // Pb_12
+            // 
+            this.Pb_12.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Pb_12.Location = new System.Drawing.Point(3, 220);
+            this.Pb_12.Name = "Pb_12";
+            this.Pb_12.Size = new System.Drawing.Size(100, 100);
+            this.Pb_12.TabIndex = 5;
+            this.Pb_12.TabStop = false;
+            this.Pb_12.Click += new System.EventHandler(this.Pb_12_Click);
+            // 
             // btn_facile
             // 
             this.btn_facile.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_facile.Location = new System.Drawing.Point(623, 340);
+            this.btn_facile.Location = new System.Drawing.Point(623, 391);
             this.btn_facile.Name = "btn_facile";
             this.btn_facile.Size = new System.Drawing.Size(95, 23);
             this.btn_facile.TabIndex = 6;
@@ -232,7 +286,7 @@
             // btn_normal
             // 
             this.btn_normal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_normal.Location = new System.Drawing.Point(623, 384);
+            this.btn_normal.Location = new System.Drawing.Point(623, 435);
             this.btn_normal.Name = "btn_normal";
             this.btn_normal.Size = new System.Drawing.Size(95, 23);
             this.btn_normal.TabIndex = 7;
@@ -243,7 +297,7 @@
             // btn_mortel
             // 
             this.btn_mortel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_mortel.Location = new System.Drawing.Point(623, 430);
+            this.btn_mortel.Location = new System.Drawing.Point(623, 481);
             this.btn_mortel.Name = "btn_mortel";
             this.btn_mortel.Size = new System.Drawing.Size(95, 23);
             this.btn_mortel.TabIndex = 8;
@@ -258,7 +312,7 @@
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label1.Location = new System.Drawing.Point(620, 298);
+            this.label1.Location = new System.Drawing.Point(620, 349);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 24);
             this.label1.TabIndex = 9;
@@ -278,10 +332,10 @@
             this.Score.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.Score.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Score.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Score.Font = new System.Drawing.Font("MS Reference Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Score.Location = new System.Drawing.Point(10, 336);
+            this.Score.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Score.Location = new System.Drawing.Point(63, 401);
             this.Score.Name = "Score";
-            this.Score.Size = new System.Drawing.Size(584, 143);
+            this.Score.Size = new System.Drawing.Size(516, 122);
             this.Score.TabIndex = 11;
             this.Score.Text = "Veuillez sélectionner votre mode de jeu";
             // 
@@ -292,7 +346,7 @@
             this.Lb_GameMode.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.Lb_GameMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lb_GameMode.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Lb_GameMode.Location = new System.Drawing.Point(620, 298);
+            this.Lb_GameMode.Location = new System.Drawing.Point(620, 349);
             this.Lb_GameMode.Name = "Lb_GameMode";
             this.Lb_GameMode.Size = new System.Drawing.Size(117, 24);
             this.Lb_GameMode.TabIndex = 9;
@@ -304,7 +358,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.ClientSize = new System.Drawing.Size(800, 483);
+            this.ClientSize = new System.Drawing.Size(800, 532);
             this.Controls.Add(this.Score);
             this.Controls.Add(this.Titre);
             this.Controls.Add(this.Lb_GameMode);
@@ -322,10 +376,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb_02)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_01)).EndInit();
             this.tlpTapisDeCartes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_05)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_06)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_07)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_08)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_06)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_05)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_09)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_12)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,6 +408,10 @@
         private System.Windows.Forms.Label Titre;
         private System.Windows.Forms.Label Score;
         private System.Windows.Forms.Label Lb_GameMode;
+        private System.Windows.Forms.PictureBox Pb_09;
+        private System.Windows.Forms.PictureBox Pb_10;
+        private System.Windows.Forms.PictureBox Pb_11;
+        private System.Windows.Forms.PictureBox Pb_12;
     }
 }
 

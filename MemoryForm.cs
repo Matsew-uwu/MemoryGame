@@ -313,7 +313,7 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Recherche\n\n→ Trouvez la carte demandée, Vous avez 4 essais\n ";
+                    mode_message = "Recherche\n\n→ Trouvez la carte demandée, Vous avez " + nbCartesSurTapis/2 + "essais\n ";
                     break;
                 case 2:
                     mode_message = "Memory\n\n→ Trouvez les paires de cartes\n";
@@ -380,7 +380,7 @@ namespace Memory
             else
             {
                 Score.Text = "Partie Terminée : " + mode_message +
-                "Essais : " + compteur.ToString() + "\n\n" + message;
+                "Essais : " + (compteur/2).ToString() + "\n\n" + message;
                 compteur = 0; //blindage
             }
         }
@@ -691,6 +691,26 @@ namespace Memory
         private void Pb_08_Click(object sender, EventArgs e)
         {
             Pb_XX_Click(sender, e, 7);
+        }
+
+        private void Pb_09_Click(object sender, EventArgs e)
+        {
+            Pb_XX_Click(sender, e, 8);
+        }
+
+        private void Pb_10_Click(object sender, EventArgs e)
+        {
+            Pb_XX_Click(sender, e, 9);
+        }
+
+        private void Pb_11_Click(object sender, EventArgs e)
+        {
+            Pb_XX_Click(sender, e, 10);
+        }
+
+        private void Pb_12_Click(object sender, EventArgs e)
+        {
+            Pb_XX_Click(sender, e, 11);
         }
 
         /* ------------------------------ */
