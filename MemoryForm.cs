@@ -534,7 +534,7 @@ namespace Memory
 
             if (nb_cartes >= nbCartesSurTapis / 2)
             {
-                MessageBox.Show(String.Format("{0} essais ont étés effectués !", nbCartesSurTapis / 2));
+                MessageBox.Show(String.Format("{0} essais ont été effectués !", nbCartesSurTapis / 2));
                 // Retourner/Afficher toutes les cartes
                 Retourner_Visible();
                 ShowEndMessage(true);
