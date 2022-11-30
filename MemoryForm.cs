@@ -65,6 +65,12 @@ namespace Memory
             PbImage1 = null;
             PbImage2 = null;
             message = "";
+
+            foreach (Control ctrl in tlpTapisDeCartes.Controls)
+            {
+                PictureBox card = (PictureBox)ctrl;
+                card.Enabled = true;
+            }
         }
 
 
@@ -218,7 +224,7 @@ namespace Memory
         private async void ClearTapis()
         {
             PictureBox carte;
-            await Task.Delay(1000); //on laisse le temps de voir le tapis avant de le retirer
+            await Task.Delay(1000); // On laisse le temps de voir le tapis avant de le retirer
             foreach (Control ctrl in tlpTapisDeCartes.Controls) //pour chaque case du tapis, je remplace par DosCarte
             {
                 carte = (PictureBox)ctrl;
@@ -254,7 +260,7 @@ namespace Memory
             {
                 case 1:
                     mode_message = "Recherche \n\n→ Vous avez trouvé la carte\n\nVous pouvez relancer une partie\n";
-                    compteur = 0;
+                    compteur = 0; // blindage
                     break;
                 case 2:
                     mode_message = "Memory \n\n→ Trouvez les paires de cartes\n";
@@ -290,7 +296,7 @@ namespace Memory
             else
             {
                 Score.Text = "Partie en cours : " + mode_message + "\n" +
-                "Essais : " + compteur.ToString() + "\n" + message;
+                "Essais : " + (compteur/2).ToString() + "\n" + message;
             }
 
         }
@@ -309,10 +315,10 @@ namespace Memory
                     mode_message = "Recherche\n\n→ Trouvez la carte demandée, Vous avez 4 essais\n ";
                     break;
                 case 2:
-                    mode_message = "Memory\n\n →Trouvez les paires de cartes\n";
+                    mode_message = "Memory\n\n→ Trouvez les paires de cartes\n";
                     break;
                 case 3:
-                    mode_message = "Mortel\n\n →Trouvez les paires de cartes\n";
+                    mode_message = "Mortel\n\n→ Trouvez les paires de cartes\n";
                     break;
                 default:
                     mode_message = "Mode erreur\n";
@@ -338,7 +344,7 @@ namespace Memory
             else
             {
                 Score.Text = "Partie en cours : " + mode_message + "\n" +
-                "Essais : " + compteur.ToString() + "\n\n" + message;
+                "Essais : " + (compteur / 2).ToString() + "\n" + message;
             }
         }
 
@@ -566,13 +572,15 @@ namespace Memory
                     nb_cartes += 2;
                     Image_1 = 0;
                     Image_2 = 0;
-                    
+
+                    PbImage1.Enabled = false;
+                    PbImage2.Enabled = false;
+
                     ShowGoodMessage();
                 }
 
                 else 
                 { 
-                
                     ShowBadMessage();
 
                     // Réinitialise et retourne les deux cartes
@@ -588,7 +596,11 @@ namespace Memory
                     PbImage1.Image = ilSabotDeCartes.Images[0];
                     PbImage2.Image = ilSabotDeCartes.Images[0];
 
+                    CurrentIndexImage = -1;
+
                 }
+                Image_1 = 0;
+                Image_2 = 0;
             }
 
             // La partie prend fin lorsque toutes les cartes sont retournées
@@ -621,18 +633,17 @@ namespace Memory
                 return; // Aucune action n'est effectué lorsque une même carte est séléctionné
             }
 
+            compteur = compteur + 1;
+
             switch (mode)
             {
                 case 1:
-                    compteur = compteur + 1;
                     Memory_V1_Handler(sender, e, index);
                     break;
                 case 2:
-                    compteur = compteur + 1;
                     Memory_V2_Handler(sender, e, index);
                     break;
                 case 3:
-                    compteur = compteur + 1;
                     Memory_V2_Handler(sender, e, index);
                     break;
                 default:
