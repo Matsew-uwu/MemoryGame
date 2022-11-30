@@ -28,6 +28,7 @@ namespace Memory
         PictureBox PbImage2;
         int CurrentIndexImage;          // L'indice de la carte retournée dans le tapis
         int nb_cartes = 0;              // Nb de carte retournées
+        int compteur = 0;               //compteur d'essais
 
         Boolean cartes_retournees;      // true si la carte est retournée (de dos) ; false autrement
         Status GameStatus;                 // Varibale indiquant si la partie est en cours
@@ -54,6 +55,7 @@ namespace Memory
         {
             // Réinitialisation des valeurs
             nb_cartes = 0;
+            compteur = 0;
             Image_1 = 0;
             Image_2 = 0;
             CurrentIndexImage = -1;
@@ -213,9 +215,10 @@ namespace Memory
         }
 
 
-        private void ClearTapis()
+        private async void ClearTapis()
         {
             PictureBox carte;
+            await Task.Delay(1000); //on laisse le temps de voir le tapis avant de le retirer
             foreach (Control ctrl in tlpTapisDeCartes.Controls) //pour chaque case du tapis, je remplace par DosCarte
             {
                 carte = (PictureBox)ctrl;
@@ -251,6 +254,7 @@ namespace Memory
             {
                 case 1:
                     mode_message = "Recherche \n\n→ Vous avez trouvé la carte\n\nVous pouvez relancer une partie\n";
+                    compteur = 0;
                     break;
                 case 2:
                     mode_message = "Memory \n\n→ Trouvez les paires de cartes\n";
@@ -276,13 +280,17 @@ namespace Memory
             // Mise à jour de l'affichage
             if (hideScore)
             {
-                Score.Text = "Partie en cours : " + mode_message +
+                if (mode==1) //blindage
+                {
+                    Score.Text = "Partie terminée : " + mode_message +
                     "\n\n" + message;
+                    compteur = 0; //blindage
+                }
             }
             else
             {
                 Score.Text = "Partie en cours : " + mode_message + "\n" +
-                "Essais : " + nb_cartes.ToString() + "\n" + message;
+                "Essais : " + compteur.ToString() + "\n" + message;
             }
 
         }
@@ -298,7 +306,7 @@ namespace Memory
             switch (mode) 
             {
                 case 1:
-                    mode_message = "Recherche\n\n→ Trouvez la carte demandée\n ";
+                    mode_message = "Recherche\n\n→ Trouvez la carte demandée, Vous avez 4 essais\n ";
                     break;
                 case 2:
                     mode_message = "Memory\n\n →Trouvez les paires de cartes\n";
@@ -330,7 +338,7 @@ namespace Memory
             else
             {
                 Score.Text = "Partie en cours : " + mode_message + "\n" +
-                "Essais : " + nb_cartes.ToString() + "\n\n" + message;
+                "Essais : " + compteur.ToString() + "\n\n" + message;
             }
         }
 
@@ -365,7 +373,8 @@ namespace Memory
             else
             {
                 Score.Text = "Partie Terminée : " + mode_message +
-                "Essais : " + nb_cartes.ToString() + "\n\n" + message;
+                "Essais : " + compteur.ToString() + "\n\n" + message;
+                compteur = 0; //blindage
             }
         }
 
@@ -615,12 +624,15 @@ namespace Memory
             switch (mode)
             {
                 case 1:
+                    compteur = compteur + 1;
                     Memory_V1_Handler(sender, e, index);
                     break;
                 case 2:
+                    compteur = compteur + 1;
                     Memory_V2_Handler(sender, e, index);
                     break;
                 case 3:
+                    compteur = compteur + 1;
                     Memory_V2_Handler(sender, e, index);
                     break;
                 default:
