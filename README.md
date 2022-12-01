@@ -4,7 +4,7 @@ Jeu Memory réalisé en C#
 
 ## Installation : 
 
-Le jeu est accessible en executant le fichier executable (.exe) présent dans le fichier Game
+Le jeu est accessible en executant le fichier executable *(.exe)* présent dans le répertoire [Game](https://github.com/Matsew-uwu/MemoryGame/tree/main/Game)
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85303770/205060980-a1bf2ea1-01d8-47aa-9b53-d21307c0eefc.png" width="500" >
